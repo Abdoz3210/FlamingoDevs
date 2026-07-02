@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/bin/common_patch.dart';
-
 class AppSizes {
   AppSizes._();
 
@@ -22,5 +20,4 @@ class AppSizes {
 
   static const double mobile = 600;
   static const double tablet = 1024;
-  
 }
