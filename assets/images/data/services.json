@@ -1,0 +1,32 @@
+[
+  {
+    "iconKey": "mobile",
+    "title": "Custom Mobile Development",
+    "description": "High-performance native and hybrid applications built with precision codebases for iOS and Android."
+  },
+  {
+    "iconKey": "design",
+    "title": "UI/UX Design",
+    "description": "Architectural design systems that prioritize user utility while maintaining high-end aesthetic standards."
+  },
+  {
+    "iconKey": "deployment",
+    "title": "App Store Deployment",
+    "description": "Seamless navigation through the complexities of App Store and Play Store compliance and launch strategies."
+  },
+  {
+    "iconKey": "ai",
+    "title": "AI Integration",
+    "description": "Embedding machine learning and large language models directly into mobile workflows for smarter UX."
+  },
+  {
+    "iconKey": "backend",
+    "title": "Backend Development",
+    "description": "Robust server-side architectures, API design, and database management ensuring low-latency data sync."
+  },
+  {
+    "iconKey": "crossplatform",
+    "title": "Cross-platform Development",
+    "description": "Efficiency-first development using Flutter and native iOS, without compromising on native-feel responsiveness."
+  }
+]
