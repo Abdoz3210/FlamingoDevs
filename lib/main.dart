@@ -1,7 +1,7 @@
+import 'package:bma_portfolio/core/router/app_router.dart';
 import 'package:bma_portfolio/core/themes/dark_theme.dart';
 import 'package:bma_portfolio/core/themes/light_theme.dart';
 import 'package:bma_portfolio/core/themes/theme_provider.dart';
-import 'package:bma_portfolio/presentation/home_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,20 +17,13 @@ class BmaApp extends StatelessWidget {
       create: (_) => ThemeProvider(),
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
-          return MaterialApp(
+          return MaterialApp.router(
             title: ' BMA Three Minds. Infinite Solutions.',
             debugShowCheckedModeBanner: false,
             themeMode: themeProvider.mode,
             theme: buildLightTheme(),
             darkTheme: buildDarkTheme(),
-            home: Scaffold(
-              body: Center(
-                child: Text(
-                  'BMA',
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-              ),
-            ),
+            routerConfig: appRouter,
           );
         },
       ),
