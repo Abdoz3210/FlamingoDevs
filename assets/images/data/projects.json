@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "lumina-digital-mall",
+    "title": "Lumina Digital Mall",
+    "category": "E-Commerce Ecosystem",
+    "shortDescription": "A hyper-fluid commerce platform engineered for luxury retail.",
+    "tagline": "A hyper-fluid architectural commerce platform designed for the next generation of luxury retail engineering.",
+    "platforms": ["iOS", "Android", "Flutter"],
+    "coverImage": "assets/images/projects/lumina-digital-mall/cover.png",
+    "challenge": "Traditional retail applications suffer from rigid data structures that fail to capture the rhythmic flow of architectural aesthetics. Lumina required a system that could handle 10,000+ SKU updates per minute without compromising on the silky 120Hz micro-interactions expected by luxury consumers.",
+    "solution": "We engineered a bespoke reactive state-management architecture using Flutter and a high-concurrency Firebase backend. By implementing custom shader-based transitions and a geometry-focused design system, we achieved a 45% increase in session duration.",
+    "techStack": ["Flutter", "Firebase", "Dart VM", "Node.js"],
+    "metrics": [
+      {"label": "Performance", "value": "99.9%"},
+      {"label": "Conversion",  "value": "+22%"},
+      {"label": "Load Time",   "value": "0.8s"}
+    ],
+    "gallery": [
+      {"path": "assets/images/projects/lumina-digital-mall/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/lumina-digital-mall/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/lumina-digital-mall/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/lumina-digital-mall/gallery_4.png", "size": "large"}
+    ],
+    "nextProjectSlug": "nova-real-estate-vr"
+  },
+  {
+    "slug": "nova-real-estate-vr",
+    "title": "Nova Real Estate VR",
+    "category": "Real Estate / VR",
+    "shortDescription": "Immersive 3D property tours built for the next generation of homebuyers.",
+    "tagline": "An immersive virtual property exploration suite blending architectural visualization with real-time 3D rendering.",
+    "platforms": ["iOS", "Android", "Flutter"],
+    "coverImage": "assets/images/projects/nova-real-estate-vr/cover.png",
+    "challenge": "Buyers couldn't get a true sense of scale or light from static photography alone, and existing 3D viewers were too heavy for mobile devices to render smoothly.",
+    "solution": "We built a lightweight custom 3D rendering pipeline on top of Flutter's GPU-accelerated canvas, streaming optimized mesh data on demand to keep load times under a second even on mid-range devices.",
+    "techStack": ["Flutter", "WebRTC", "AWS"],
+    "metrics": [
+      {"label": "Performance", "value": "98.7%"},
+      {"label": "Engagement",  "value": "+38%"},
+      {"label": "Load Time",   "value": "1.1s"}
+    ],
+    "gallery": [
+      {"path": "assets/images/projects/nova-real-estate-vr/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/nova-real-estate-vr/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/nova-real-estate-vr/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/nova-real-estate-vr/gallery_4.png", "size": "large"}
+    ],
+    "nextProjectSlug": "aether-boutique"
+  },
+  {
+    "slug": "aether-boutique",
+    "title": "Aether Boutique",
+    "category": "E-Commerce",
+    "shortDescription": "A boutique fashion storefront with editorial-grade product presentation.",
+    "tagline": "A refined fashion commerce experience that treats every product page like an editorial spread.",
+    "platforms": ["iOS", "Android"],
+    "coverImage": "assets/images/projects/aether-boutique/cover.png",
+    "challenge": "The client's existing app felt generic and templated, undermining a brand built on exclusivity and craft.",
+    "solution": "We designed a fully custom UI kit with hand-tuned typography and motion, paired with a headless commerce backend for full content flexibility.",
+    "techStack": ["Flutter", "Shopify Headless", "GraphQL"],
+    "metrics": [
+      {"label": "Performance", "value": "99.2%"},
+      {"label": "Conversion",  "value": "+19%"},
+      {"label": "Load Time",   "value": "0.9s"}
+    ],
+    "gallery": [
+      {"path": "assets/images/projects/aether-boutique/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/aether-boutique/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/aether-boutique/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/aether-boutique/gallery_4.png", "size": "large"}
+    ],
+    "nextProjectSlug": "vitalis-ai"
+  },
+  {
+    "slug": "vitalis-ai",
+    "title": "Vitalis AI",
+    "category": "Healthtech / AI",
+    "shortDescription": "AI-assisted health monitoring with real-time biometric visualization.",
+    "tagline": "An AI-driven wellness companion that turns raw biometric streams into clear, actionable insight.",
+    "platforms": ["iOS", "Android", "Flutter"],
+    "coverImage": "assets/images/projects/vitalis-ai/cover.png",
+    "challenge": "Raw sensor data from wearables was accurate but unreadable to everyday users, and on-device inference needed to run without draining battery life.",
+    "solution": "We integrated a quantized on-device ML model for real-time anomaly detection, paired with a custom data-visualization layer built natively in Flutter.",
+    "techStack": ["Flutter", "TensorFlow Lite", "HealthKit", "Firebase"],
+    "metrics": [
+      {"label": "Performance", "value": "99.5%"},
+      {"label": "Accuracy",    "value": "96.3%"},
+      {"label": "Load Time",   "value": "0.7s"}
+    ],
+    "gallery": [
+      {"path": "assets/images/projects/vitalis-ai/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/vitalis-ai/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/vitalis-ai/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/vitalis-ai/gallery_4.png", "size": "large"}
+    ],
+    "nextProjectSlug": "estate-logic"
+  },
+  {
+    "slug": "estate-logic",
+    "title": "Estate Logic",
+    "category": "Real Estate",
+    "shortDescription": "Portfolio management tooling for real estate investment firms.",
+    "tagline": "A precision financial dashboard for real estate investors tracking portfolios across multiple markets.",
+    "platforms": ["iOS", "Flutter"],
+    "coverImage": "assets/images/projects/estate-logic/cover.png",
+    "challenge": "Investors were juggling spreadsheets across multiple properties with no single source of truth for portfolio performance.",
+    "solution": "We built a unified dashboard with live market data integration and automated reporting, replacing manual spreadsheet workflows entirely.",
+    "techStack": ["Flutter", "PostgreSQL", "Node.js", "Plaid API"],
+    "metrics": [
+      {"label": "Performance", "value": "99.1%"},
+      {"label": "Time Saved",  "value": "12h/wk"},
+      {"label": "Load Time",   "value": "0.9s"}
+    ],
+    "gallery": [
+      {"path": "assets/images/projects/estate-logic/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/estate-logic/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/estate-logic/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/estate-logic/gallery_4.png", "size": "large"}
+    ],
+    "nextProjectSlug": "sonic-pure"
+  },
+  {
+    "slug": "sonic-pure",
+    "title": "Sonic Pure",
+    "category": "Education",
+    "shortDescription": "An ear-training and music theory app for self-taught musicians.",
+    "tagline": "A gamified ear-training platform that makes music theory click through daily bite-sized practice.",
+    "platforms": ["iOS", "Android", "Flutter"],
+    "coverImage": "assets/images/projects/sonic-pure/cover.png",
+    "challenge": "Existing ear-training apps felt like homework. The client wanted something that felt more like a game you'd actually want to open every day.",
+    "solution": "We designed a streak-based progression system with adaptive difficulty, paired with real-time audio pitch detection built using Flutter's low-latency audio plugins.",
+    "techStack": ["Flutter", "Firebase", "FFT Audio Engine"],
+    "metrics": [
+      {"label": "Performance", "value": "99.4%"},
+      {"label": "Retention",   "value": "+31%"},
+      {"label": "Load Time",   "value": "0.6s"}
+    ],
+    "gallery": [
+      {"path": "assets/images/projects/sonic-pure/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/sonic-pure/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/sonic-pure/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/sonic-pure/gallery_4.png", "size": "large"}
+    ],
+    "nextProjectSlug": "lumina-digital-mall"
+  }
+]
