@@ -1,7 +1,0 @@
-Launching lib/main.dart on Chrome in debug mode...
-Error detected in pubspec.yaml:
-No file or variants found for asset: assets/data/projects.json.
-
-Failed to compile application.
-
-Exited (1).
