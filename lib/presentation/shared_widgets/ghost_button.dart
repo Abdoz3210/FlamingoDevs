@@ -35,9 +35,9 @@ class _GhostButtonState extends State<GhostButton> {
 
           child: Text(
             widget.label,
-            style: AppTypogragh.mono(
+            style: AppTypogragh.origami(
               color: Theme.of(context).colorScheme.onSurface,
-            ).copyWith(fontSize: 14),
+            ).copyWith(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
       ),

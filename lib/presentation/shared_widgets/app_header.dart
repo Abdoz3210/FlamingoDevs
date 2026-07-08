@@ -140,7 +140,6 @@ class _NavLink extends StatefulWidget {
   final VoidCallback onTap;
 
   const _NavLink({
-    super.key,
     required this.label,
     required this.isActive,
     required this.onTap,

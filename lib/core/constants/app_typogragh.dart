@@ -75,7 +75,7 @@ class AppTypogragh {
   }
 
   static TextStyle mono({required Color color, double fontSize = 12}) {
-    return GoogleFonts.jetBrainsMono(
+    return GoogleFonts.monoton(
       fontSize: fontSize,
       fontWeight: FontWeight.w500,
       height: 16 / 12,
@@ -99,6 +99,16 @@ class AppTypogragh {
       fontSize: 28,
       fontWeight: FontWeight.w400,
       height: 40 / 32,
+      color: color,
+    );
+  }
+
+  static TextStyle origami({required Color color}) {
+    return TextStyle(
+      fontFamily: 'Origami',
+      fontSize: 38,
+      fontWeight: FontWeight.w400,
+      height: 1.15,
       color: color,
     );
   }

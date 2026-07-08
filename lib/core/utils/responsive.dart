@@ -22,6 +22,5 @@ class Responsive {
     if (isMobile(context)) return 1;
     if (isTablet(context)) return 2;
     return 3;
-    
   }
 }
