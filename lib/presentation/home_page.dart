@@ -1,5 +1,7 @@
 import 'package:bma_portfolio/presentation/shared_widgets/app_logo.dart';
+import 'package:bma_portfolio/presentation/shared_widgets/ghost_button.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/primary_button.dart';
+import 'package:bma_portfolio/presentation/shared_widgets/section_title.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import '../../core/utils/scroll_service.dart';
@@ -23,6 +25,8 @@ class _HomePageState extends State<HomePage> {
             AppLogo(),
             ThemeToggleButton(),
             PrimaryButton(label: 'test', onPressed: () {}),
+            GhostButton(label: 'text ghost button', onPressed: () {}),
+            SectionTitle(eyebrow: 'test eyebow', title: 'text section title'),
           ],
         ),
       ),
