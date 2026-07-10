@@ -59,12 +59,17 @@ class _HeroSectionState extends State<HeroSection>
 
   Widget _buildDesktop(BuildContext context, TextStyle? headlineStyle) {
     final colors = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(flex: 3, child: _buildContent(context, headlineStyle, colors)),
         const SizedBox(width: 40),
-        Expanded(flex: 2, child: Center(child: _buildFloatingMark(context))),
+        Expanded(
+          flex: 2,
+          child: Center(child: _HoverLogo(isDark: isDark)),
+        ),
       ],
     );
   }
@@ -84,25 +89,24 @@ class _HeroSectionState extends State<HeroSection>
       children: [
         Text(
           'MOBILE ENGINEERING',
-          style: AppTypogragh.mono(color: colors.primary),
+          style: AppTypogragh.headlineMobile(color: colors.primary),
         ),
         const SizedBox(height: 20),
         // Headline — each line reacts to hover independently
         _HoverText(
           text: 'Precisely crafted',
-          style: AppTypogragh.origami(color: AppColors.lightPrimary),
-          context: context,
-          useGradientDefault: false, // this line starts as gradient
+          style: AppTypogragh.origami(color: AppColors.darkPrimaryContainer),
+          useGradientDefault: true, // this line starts as gradient
         ),
         _HoverText(
           text: 'mobile experiences',
-          style: AppTypogragh.origami(color: AppColors.lightPrimary),
-          context: context,
+          style: AppTypogragh.origami(color: AppColors.darkPrimaryContainer),
+          useGradientDefault: true, // this line starts as gradient
         ),
         _HoverText(
           text: 'for visionary brands.',
-          style: AppTypogragh.origami(color: AppColors.lightPrimary),
-          context: context,
+          style: AppTypogragh.origami(color: AppColors.darkPrimaryContainer),
+          useGradientDefault: true, // this line starts as gradient
         ),
 
         const SizedBox(height: 20),
@@ -136,14 +140,8 @@ class _HeroSectionState extends State<HeroSection>
   }
 }
 
-Widget _buildFloatingMark(BuildContext context) {
-  final isDark = Theme.of(context).brightness == Brightness.dark;
-  return _HoverLogo(isDark: isDark);
-}
-
 class _HoverLogo extends StatefulWidget {
   final bool isDark;
-
   const _HoverLogo({required this.isDark});
 
   @override
@@ -170,15 +168,32 @@ class __HoverLogoState extends State<_HoverLogo> {
       onExit: (_) => setState(() {
         _hovered = false;
       }),
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 600),
-        child: Image.asset(
-          _hovered ? hoverAsset : defualtAsset,
-          key: ValueKey(_hovered),
-          width: 400,
-          height: 400,
-          fit: BoxFit.contain,
-        ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AnimatedOpacity(
+            opacity: _hovered ? 0.0 : 1.0,
+            duration: const Duration(milliseconds: 400),
+            child: Image.asset(
+              defualtAsset,
+              key: ValueKey(_hovered),
+              width: 400,
+              height: 400,
+              fit: BoxFit.contain,
+            ),
+          ),
+          AnimatedOpacity(
+            opacity: _hovered ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 400),
+            child: Image.asset(
+              hoverAsset,
+              key: ValueKey(_hovered),
+              width: 400,
+              height: 400,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -187,13 +202,11 @@ class __HoverLogoState extends State<_HoverLogo> {
 class _HoverText extends StatefulWidget {
   final String text;
   final TextStyle style;
-  final BuildContext context;
   final bool useGradientDefault;
 
   const _HoverText({
     required this.text,
     required this.style,
-    required this.context,
     this.useGradientDefault = false,
   });
 
@@ -208,29 +221,35 @@ class _HoverTextState extends State<_HoverText> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    // Logic:
-    // - Lines that start as gradient → hover turns them plain onSurface
-    // - Lines that start as plain   → hover turns them gradient
-    final showGradient = widget.useGradientDefault
-        ? !_hovered // started gradient, hover removes it
-        : _hovered; // started plain, hover adds it
+    final showGradient = widget.useGradientDefault ? !_hovered : _hovered;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 250),
-        child: showGradient
-            ? AppGradient.text(
-                context: context,
-                key: const ValueKey('gradient'),
-                child: Text(widget.text, style: widget.style),
-              )
-            : Text(
-                widget.text,
-                key: const ValueKey('plain'),
-                style: widget.style.copyWith(color: colors.onSurface),
+      child: Stack(
+        children: [
+          AnimatedOpacity(
+            opacity: showGradient ? 0.0 : 1.0,
+            duration: const Duration(milliseconds: 250),
+            child: Text(
+              widget.text,
+              key: ValueKey('gradient_${widget.text}'),
+              style: widget.style,
+            ),
+          ),
+          AnimatedOpacity(
+            opacity: showGradient ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 250),
+            child: Text(
+              widget.text,
+              key: ValueKey('plain_${widget.text}'),
+              style: widget.style.copyWith(
+                color: colors.onSurface,
+                fontWeight: FontWeight.w900,
               ),
+            ),
+          ),
+        ],
       ),
     );
   }
