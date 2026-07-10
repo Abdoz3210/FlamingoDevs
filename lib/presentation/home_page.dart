@@ -1,4 +1,5 @@
 import 'package:bma_portfolio/core/constants/app_colors.dart';
+import 'package:bma_portfolio/presentation/home/widgets/hero_section.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/animated_section_wrapper.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/app_header.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     _scrollController.addListener(_onScroll);
+    _scrollService.controller = _scrollController;
 
     if (widget.initialSection != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -54,35 +57,41 @@ class _HomePageState extends State<HomePage> {
             controller: _scrollController,
             child: Column(
               children: [
-                KeyedSubtree(
+                SizedBox(
                   key: _scrollService.keyFor(HomeSection.hero),
-                  child: _buildPlaceholderSection('Hero Section', 600),
+                  width: double.infinity,
+                  child: HeroSection(scrollService: _scrollService),
                 ),
 
-                KeyedSubtree(
+                SizedBox(
                   key: _scrollService.keyFor(HomeSection.about),
+                  width: double.infinity,
                   child: AnimatedSectionWrapper(
                     child: _buildPlaceholderSection('About Section', 400),
                   ),
                 ),
-                KeyedSubtree(
-                  key: _scrollService.keyFor(HomeSection.service),
+                SizedBox(
+                  key: _scrollService.keyFor(HomeSection.services),
+                  width: double.infinity,
                   child: AnimatedSectionWrapper(
                     child: _buildPlaceholderSection('Services Section', 500),
                   ),
                 ),
-                KeyedSubtree(
+                SizedBox(
                   key: _scrollService.keyFor(HomeSection.projects),
+                  width: double.infinity,
                   child: AnimatedSectionWrapper(
                     child: _buildPlaceholderSection('Projects Section', 600),
                   ),
                 ),
-                KeyedSubtree(
+                SizedBox(
                   key: _scrollService.keyFor(HomeSection.contact),
+                  width: double.infinity,
                   child: AnimatedSectionWrapper(
                     child: _buildPlaceholderSection('Contact Section', 400),
                   ),
                 ),
+                SizedBox(height: MediaQuery.of(context).size.height - 100),
               ],
             ),
           ),
@@ -109,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                     : [],
               ),
               child: AppHeader(
-                scrollservice: ScrollService(),
+                scrollservice: _scrollService,
                 activeSection: _activeSection,
               ),
             ),

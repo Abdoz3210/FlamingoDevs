@@ -20,4 +20,17 @@ class AppGradient {
       child: child,
     );
   }
+
+  static Widget text({
+    required BuildContext context,
+    required Widget child,
+    Key? key, // ADD THIS
+  }) {
+    return ShaderMask(
+      key: key, // AND THIS
+      blendMode: BlendMode.srcIn,
+      shaderCallback: (bounds) => of(context).createShader(bounds),
+      child: child,
+    );
+  }
 }

@@ -29,7 +29,7 @@ class _AppHeaderState extends State<AppHeader> {
 
   static const _navItems = [
     (HomeSection.about, 'About'),
-    (HomeSection.service, 'Services'),
+    (HomeSection.services, 'Services'),
     (HomeSection.projects, 'Projects'),
     (HomeSection.contact, 'Contact'),
   ];
