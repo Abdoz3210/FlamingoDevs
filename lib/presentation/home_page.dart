@@ -1,6 +1,7 @@
 import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/presentation/home/widgets/about_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/hero_section.dart';
+import 'package:bma_portfolio/presentation/home/widgets/service_section.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/animated_section_wrapper.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/app_header.dart';
 import 'package:flutter/material.dart';
@@ -74,9 +75,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   key: _scrollService.keyFor(HomeSection.services),
                   width: double.infinity,
-                  child: AnimatedSectionWrapper(
-                    child: _buildPlaceholderSection('Services Section', 500),
-                  ),
+                  child: AnimatedSectionWrapper(child: ServicesSection()),
                 ),
                 SizedBox(
                   key: _scrollService.keyFor(HomeSection.projects),
