@@ -1,6 +1,7 @@
 import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/presentation/home/widgets/about_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/hero_section.dart';
+import 'package:bma_portfolio/presentation/home/widgets/projects_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/service_section.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/animated_section_wrapper.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/app_header.dart';
@@ -80,9 +81,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   key: _scrollService.keyFor(HomeSection.projects),
                   width: double.infinity,
-                  child: AnimatedSectionWrapper(
-                    child: _buildPlaceholderSection('Projects Section', 600),
-                  ),
+                  child: AnimatedSectionWrapper(child: ProjectsSection()),
                 ),
                 SizedBox(
                   key: _scrollService.keyFor(HomeSection.contact),
