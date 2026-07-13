@@ -13,13 +13,7 @@ class AppGradient {
     );
   }
 
-  static Widget Text({required BuildContext context, required Widget child}) {
-    return ShaderMask(
-      blendMode: BlendMode.srcIn,
-      shaderCallback: (bounds) => of(context).createShader(bounds),
-      child: child,
-    );
-  }
+ 
 
   static Widget text({
     required BuildContext context,

@@ -17,9 +17,9 @@ class ScrollService {
 
   void scrollTo(HomeSection section) {
     if (controller == null || !controller!.hasClients) {
-      print(
-        "⚠️ ScrollService Error: Controller is not attached to any scroll view!",
-      );
+      // print(
+      //   "⚠️ ScrollService Error: Controller is not attached to any scroll view!",
+      // );
       return;
     }
 

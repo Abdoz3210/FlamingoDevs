@@ -1,6 +1,5 @@
 import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
-import 'package:bma_portfolio/core/themes/app_gradient.dart';
 import 'package:bma_portfolio/core/utils/responsive.dart';
 import 'package:bma_portfolio/core/utils/scroll_service.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/ghost_button.dart';

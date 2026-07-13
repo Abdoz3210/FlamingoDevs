@@ -2,7 +2,6 @@ import 'package:bma_portfolio/core/router/router_names.dart';
 import 'package:bma_portfolio/core/utils/scroll_service.dart';
 import 'package:bma_portfolio/presentation/home_page.dart';
 import 'package:bma_portfolio/presentation/project_details_page.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -40,6 +40,8 @@ dependencies:
   # visibilty_detector: ^0.4.0+2
   visibility_detector: ^0.4.0+2
   flutter_staggered_animations: ^1.1.1
+  http: ^1.2.2
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

@@ -97,7 +97,7 @@ Widget _buildText(BuildContext context) {
 }
 
 class _StatCard extends StatelessWidget {
-  const _StatCard({super.key, required this.value, required this.label});
+  const _StatCard({ required this.value, required this.label});
   final String value;
   final String label;
 

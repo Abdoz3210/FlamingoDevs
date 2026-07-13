@@ -1,5 +1,7 @@
 import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/presentation/home/widgets/about_section.dart';
+// import 'package:bma_portfolio/presentation/home/widgets/app_footer.dart';
+// import 'package:bma_portfolio/presentation/home/widgets/contact_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/hero_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/projects_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/service_section.dart';
@@ -83,14 +85,12 @@ class _HomePageState extends State<HomePage> {
                   width: double.infinity,
                   child: AnimatedSectionWrapper(child: ProjectsSection()),
                 ),
-                SizedBox(
-                  key: _scrollService.keyFor(HomeSection.contact),
-                  width: double.infinity,
-                  child: AnimatedSectionWrapper(
-                    child: _buildPlaceholderSection('Contact Section', 400),
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height - 100),
+                // SizedBox(
+                //   key: _scrollService.keyFor(HomeSection.contact),
+                //   width: double.infinity,
+                //   child: AnimatedSectionWrapper(child: ContactSection()),
+                // ),
+                // const AppFooter(),
               ],
             ),
           ),
@@ -123,19 +123,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildPlaceholderSection(String label, double height) {
-    final colors = Theme.of(context).colorScheme;
-    return Container(
-      width: double.infinity,
-      height: height,
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      color: colors.surfaceContainerLow,
-      child: Center(
-        child: Text(label, style: Theme.of(context).textTheme.headlineMedium),
       ),
     );
   }
