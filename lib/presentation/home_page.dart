@@ -1,5 +1,6 @@
 import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/presentation/home/widgets/about_section.dart';
+import 'package:bma_portfolio/presentation/home/widgets/app_footer.dart';
 // import 'package:bma_portfolio/presentation/home/widgets/app_footer.dart';
 // import 'package:bma_portfolio/presentation/home/widgets/contact_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/hero_section.dart';
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                 //   width: double.infinity,
                 //   child: AnimatedSectionWrapper(child: ContactSection()),
                 // ),
-                // const AppFooter(),
+                const AppFooter(),
               ],
             ),
           ),

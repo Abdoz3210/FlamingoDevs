@@ -1,8 +1,6 @@
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
-import 'package:bma_portfolio/core/router/router_names.dart';
 import 'package:bma_portfolio/data/models/project_model.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'dart:math' show pi;
 
 class ProjectCard extends StatefulWidget {
@@ -18,7 +16,7 @@ class _ProjectCardState extends State<ProjectCard>
   late final AnimationController _controller;
   late final Animation<double> _animation;
   bool _flipped = false;
-  bool _hovered = false;
+  // bool _hovered = false;
 
   @override
   void initState() {
@@ -51,7 +49,7 @@ class _ProjectCardState extends State<ProjectCard>
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+    // final colors = Theme.of(context).colorScheme;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() {
@@ -83,7 +81,7 @@ class _ProjectCardState extends State<ProjectCard>
 }
 
 class _BackFace extends StatelessWidget {
-  const _BackFace({super.key, required this.project});
+  const _BackFace({required this.project});
   final ProjectModel project;
 
   @override
@@ -164,7 +162,7 @@ class _BackFace extends StatelessWidget {
 }
 
 class _FrontFace extends StatelessWidget {
-  const _FrontFace({super.key, required this.project});
+  const _FrontFace({required this.project});
   final ProjectModel project;
 
   @override
@@ -222,7 +220,7 @@ class _FrontFace extends StatelessWidget {
 }
 
 class _MiniChip extends StatelessWidget {
-  const _MiniChip({super.key, required this.label});
+  const _MiniChip({required this.label});
   final String label;
 
   @override
