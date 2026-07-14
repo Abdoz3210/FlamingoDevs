@@ -31,7 +31,7 @@ class _AppHeaderState extends State<AppHeader> {
     (HomeSection.about, 'About'),
     (HomeSection.services, 'Services'),
     (HomeSection.projects, 'Projects'),
-    (HomeSection.contact, 'Contact'),
+    (HomeSection.footer, 'Contact'),
   ];
 
   void _goto(HomeSection section) {

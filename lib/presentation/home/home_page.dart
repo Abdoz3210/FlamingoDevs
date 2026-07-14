@@ -1,6 +1,7 @@
 import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/presentation/home/widgets/about_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/app_footer.dart';
+import 'package:bma_portfolio/presentation/home/widgets/contact_section.dart';
 // import 'package:bma_portfolio/presentation/home/widgets/app_footer.dart';
 // import 'package:bma_portfolio/presentation/home/widgets/contact_section.dart';
 import 'package:bma_portfolio/presentation/home/widgets/hero_section.dart';
@@ -9,7 +10,7 @@ import 'package:bma_portfolio/presentation/home/widgets/service_section.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/animated_section_wrapper.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/app_header.dart';
 import 'package:flutter/material.dart';
-import '../../core/utils/scroll_service.dart';
+import '../../../core/utils/scroll_service.dart';
 
 class HomePage extends StatefulWidget {
   final HomeSection? initialSection;
@@ -86,12 +87,16 @@ class _HomePageState extends State<HomePage> {
                   width: double.infinity,
                   child: AnimatedSectionWrapper(child: ProjectsSection()),
                 ),
-                // SizedBox(
-                //   key: _scrollService.keyFor(HomeSection.contact),
-                //   width: double.infinity,
-                //   child: AnimatedSectionWrapper(child: ContactSection()),
-                // ),
-                const AppFooter(),
+                SizedBox(
+                  key: _scrollService.keyFor(HomeSection.contact),
+                  width: double.infinity,
+                  child: AnimatedSectionWrapper(child: ContactSection()),
+                ),
+                SizedBox(
+                  key: _scrollService.keyFor(HomeSection.footer),
+                  width: double.infinity,
+                  child: const AppFooter(),
+                ),
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-enum HomeSection { hero, about, services, projects, contact }
+enum HomeSection { hero, about, services, projects, contact, footer }
 
 class ScrollService {
   ScrollService._internal();
