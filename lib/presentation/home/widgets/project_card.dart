@@ -1,7 +1,10 @@
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
+import 'package:bma_portfolio/core/router/router_names.dart';
 import 'package:bma_portfolio/data/models/project_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' show pi;
+
+import 'package:go_router/go_router.dart';
 
 class ProjectCard extends StatefulWidget {
   final ProjectModel project;
@@ -71,7 +74,15 @@ class _ProjectCardState extends State<ProjectCard>
               ..setEntry(3, 2, 0.001)
               ..rotateY(tilt),
             child: showBack
-                ? _BackFace(project: widget.project)
+                ? GestureDetector(
+                    onTap: () => {
+                      context.goNamed(
+                        RouterNames.projectDetails,
+                        pathParameters: {'slug': widget.project.slug},
+                      ),
+                    },
+                    child: _BackFace(project: widget.project),
+                  )
                 : _FrontFace(project: widget.project),
           );
         },
