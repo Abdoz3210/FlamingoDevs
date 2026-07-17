@@ -4,6 +4,7 @@ import 'package:bma_portfolio/core/utils/responsive.dart';
 import 'package:bma_portfolio/data/models/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectHero extends StatelessWidget {
   final ProjectModel project;
@@ -56,6 +57,7 @@ class ProjectHero extends StatelessWidget {
         Expanded(flex: 5, child: _buildInfo(context)),
         const SizedBox(width: 40),
         Expanded(flex: 6, child: _buildCoverImage(context)),
+        _GitHubButton(url: project.githubUrl),
       ],
     );
   }
@@ -67,6 +69,11 @@ class ProjectHero extends StatelessWidget {
         _buildInfo(context),
         const SizedBox(height: 28),
         _buildCoverImage(context),
+        // GitHub button — only shows if repo URL is provided
+        if (project.githubUrl.isNotEmpty) ...[
+          const SizedBox(height: 20),
+          _GitHubButton(url: project.githubUrl),
+        ],
       ],
     );
   }
@@ -170,6 +177,67 @@ class _PlatformPill extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _GitHubButton extends StatefulWidget {
+  final String url;
+  const _GitHubButton({required this.url});
+
+  @override
+  State<_GitHubButton> createState() => _GitHubButtonState();
+}
+
+class _GitHubButtonState extends State<_GitHubButton> {
+  bool _hovered = false;
+
+  Future<void> _open() async {
+    final uri = Uri.parse(widget.url);
+    if (await canLaunchUrl(uri)) await launchUrl(uri);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: _open,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(
+              color: _hovered ? colors.primary : colors.outlineVariant,
+            ),
+            color: _hovered
+                ? colors.primary.withValues(alpha: 0.08)
+                : Colors.transparent,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.code,
+                size: 16,
+                color: _hovered ? colors.primary : colors.onSurfaceVariant,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'VIEW ON GITHUB',
+                style: AppTypogragh.mono(
+                  color: _hovered ? colors.primary : colors.onSurfaceVariant,
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

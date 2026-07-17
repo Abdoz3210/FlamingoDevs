@@ -44,6 +44,7 @@ class ProjectModel {
   final List<ProjectMetrics> metrics;
   final List<GalleryImage> gallery;
   final String? nextProjectSlug;
+  final String githubUrl; 
 
   const ProjectModel({
     required this.slug,
@@ -58,7 +59,7 @@ class ProjectModel {
     required this.techStack,
     required this.metrics,
     required this.gallery,
-    this.nextProjectSlug,
+    this.nextProjectSlug, required this.githubUrl,
   });
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
@@ -79,7 +80,7 @@ class ProjectModel {
       gallery: (json['gallery'] as List)
           .map((e) => GalleryImage.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nextProjectSlug: json['nextProjectSlug'] as String?,
+      nextProjectSlug: json['githubUrl'] as String?, githubUrl: '',
     );
   }
 }

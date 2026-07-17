@@ -5,7 +5,9 @@ import 'package:bma_portfolio/core/utils/scroll_service.dart';
 import 'package:bma_portfolio/data/models/project_model.dart';
 import 'package:bma_portfolio/data/repositories/project_repository.dart';
 import 'package:bma_portfolio/presentation/home/widgets/app_footer.dart';
+import 'package:bma_portfolio/presentation/project_details/widget/next_project_link.dart';
 import 'package:bma_portfolio/presentation/project_details/widget/project_description.dart';
+import 'package:bma_portfolio/presentation/project_details/widget/project_gallery.dart';
 import 'package:bma_portfolio/presentation/project_details/widget/project_hero.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/app_header.dart';
 import 'package:flutter/foundation.dart';
@@ -93,6 +95,9 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
                 ProjectHero(project: _project!),
                 const SizedBox(height: 40),
                 ProjectDescription(project: _project!),
+                ProjectGallery(project: _project!),
+                const SizedBox(height: 48),
+                if (_next != null) NextProjectLink(next: _next!),
                 AppFooter(),
               ],
             ),
