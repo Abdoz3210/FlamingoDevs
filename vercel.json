@@ -1,0 +1,10 @@
+{
+  "buildCommand": "curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.38.9-stable.tar.xz | tar xJ -C $HOME && export PATH=$PATH:$HOME/flutter/bin && flutter build web --release",
+  "outputDirectory": "build/web",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
