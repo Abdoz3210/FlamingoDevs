@@ -6,7 +6,7 @@
     "shortDescription": "A SwiftUI iOS app for browsing, ordering, and managing coffee shop orders.",
     "tagline": "A seamless coffee ordering experience — from menu browsing to order confirmation, built natively for iOS.",
     "platforms": ["iOS"],
-    "coverImage": "images/projects/my-coffee-shop/cover.png",
+    "coverImage": "assets/images/projects/my-coffee-shop/cover.png",
     "githubUrl": "https://github.com/mennahmustafaa/MyCoffeeShop",
     "challenge": "Coffee shop customers needed a smooth digital ordering experience that matched the premium feel of the brand, with real-time order tracking and a clean, intuitive UI that works for all age groups.",
     "solution": "We built a fully native SwiftUI app following MVVM architecture, integrating Supabase for authentication and backend. The app features cart management, favorites, promo codes, location selection, and push notifications for order updates — all wrapped in smooth animations.",
@@ -17,10 +17,10 @@
       {"label": "Backend", "value": "Supabase"}
     ],
     "gallery": [
-      {"path": "images/projects/my-coffee-shop/gallery_1.png", "size": "small"},
-      {"path": "images/projects/my-coffee-shop/gallery_2.png", "size": "small"},
-      {"path": "images/projects/my-coffee-shop/gallery_3.png", "size": "tall"},
-      {"path": "images/projects/my-coffee-shop/gallery_4.png", "size": "large"}
+      {"path": "assets/images/projects/my-coffee-shop/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/my-coffee-shop/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/my-coffee-shop/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/my-coffee-shop/gallery_4.png", "size": "large"}
     ],
     "nextProjectSlug": "weather-app-ios"
   },
@@ -31,7 +31,7 @@
     "shortDescription": "A beautiful iOS weather app with real-time forecasts and smooth animations.",
     "tagline": "Real-time weather data and 5-day forecasts delivered through a sleek SwiftUI interface with interactive bottom sheets.",
     "platforms": ["iOS"],
-    "coverImage": "images/projects/weather-app-ios/cover.png",
+    "coverImage": "assets/images/projects/weather-app-ios/cover.png",
     "githubUrl": "https://github.com/mennahmustafaa/Weather-App-iOS",
     "challenge": "Most weather apps either look outdated or sacrifice usability for aesthetics. The goal was to build an app that feels premium, loads fast, and handles poor network conditions gracefully — all optimized for every iPhone screen size.",
     "solution": "Built with SwiftUI following strict MVVM and SOLID principles, integrating OpenWeatherMap's API for live data. Features a custom interactive bottom sheet for forecasts, debounced city search, progressive data loading, and centralized error handling for all network edge cases.",
@@ -42,10 +42,10 @@
       {"label": "iOS Support", "value": "15.5+"}
     ],
     "gallery": [
-      {"path": "images/projects/weather-app-ios/gallery_1.png", "size": "small"},
-      {"path": "images/projects/weather-app-ios/gallery_2.png", "size": "small"},
-      {"path": "images/projects/weather-app-ios/gallery_3.png", "size": "tall"},
-      {"path": "images/projects/weather-app-ios/gallery_4.png", "size": "large"}
+      {"path": "assets/images/projects/weather-app-ios/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/weather-app-ios/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/weather-app-ios/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/weather-app-ios/gallery_4.png", "size": "large"}
     ],
     "nextProjectSlug": "money-tracker-ios"
   },
@@ -56,7 +56,7 @@
     "shortDescription": "A personal finance iOS app for tracking budgets, goals, and donations.",
     "tagline": "A complete personal finance companion — track spending, set savings goals, manage wishlists, and record donations in one clean iOS app.",
     "platforms": ["iOS"],
-    "coverImage": "images/projects/money-tracker-ios/cover.png",
+    "coverImage": "assets/images/projects/money-tracker-ios/cover.png",
     "githubUrl": "https://github.com/mennahmustafaa/MoneyTracker-iOS-App",
     "challenge": "Personal finance apps are often either too complex or too shallow — users needed a single app that covers transactions, budgets, savings goals, shopping lists, and charitable giving without feeling overwhelming.",
     "solution": "Built with Swift 6 and SwiftUI using a feature-based MVVM architecture. Supabase handles authentication and data persistence. The app includes a budget dashboard, transaction history with categories, goal progress cards, wishlist management, donation tracking with impact summaries, and a profile overview — all with smooth animations and an onboarding flow.",
@@ -67,10 +67,10 @@
       {"label": "Architecture", "value": "MVVM"}
     ],
     "gallery": [
-      {"path": "images/projects/money-tracker-ios/gallery_1.png", "size": "small"},
-      {"path": "images/projects/money-tracker-ios/gallery_2.png", "size": "small"},
-      {"path": "images/projects/money-tracker-ios/gallery_3.png", "size": "tall"},
-      {"path": "images/projects/money-tracker-ios/gallery_4.png", "size": "large"}
+      {"path": "assets/images/projects/money-tracker-ios/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/money-tracker-ios/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/money-tracker-ios/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/money-tracker-ios/gallery_4.png", "size": "large"}
     ],
     "nextProjectSlug": "news-cloud-app"
   },
@@ -81,7 +81,7 @@
     "shortDescription": "A cross-platform Flutter news app with real-time headlines across 7 categories.",
     "tagline": "Real-time top headlines across Business, Health, Science, Sports, and more — delivered through a clean category-driven Flutter experience.",
     "platforms": ["iOS", "Android", "Flutter"],
-    "coverImage": "images/projects/news-cloud-app/cover.png",
+    "coverImage": "assets/images/projects/news-cloud-app/cover.png",
     "githubUrl": "https://github.com/Abdoz3210/News-Cloud-App",
     "challenge": "News consumption is fragmented across too many sources. Users needed a single clean interface to browse headlines by category, with fast loading, rich article cards, and reliable error handling when the network fails.",
     "solution": "Built with Flutter and Dart, using Dio for HTTP requests against the NewsAPI. Features a horizontal category carousel with cover images, async data fetching with FutureBuilder, loading indicators, and a detail view per article. Runs on Android, iOS, Web, macOS, Linux, and Windows from a single codebase.",
@@ -92,10 +92,10 @@
       {"label": "Data", "value": "Real-time"}
     ],
     "gallery": [
-      {"path": "images/projects/news-cloud-app/gallery_1.png", "size": "small"},
-      {"path": "images/projects/news-cloud-app/gallery_2.png", "size": "small"},
-      {"path": "images/projects/news-cloud-app/gallery_3.png", "size": "tall"},
-      {"path": "images/projects/news-cloud-app/gallery_4.png", "size": "large"}
+      {"path": "assets/images/projects/news-cloud-app/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/news-cloud-app/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/news-cloud-app/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/news-cloud-app/gallery_4.png", "size": "large"}
     ],
     "nextProjectSlug": "placeholder-one"
   },
@@ -106,7 +106,7 @@
     "shortDescription": "Another project from Flamingo — details coming soon.",
     "tagline": "We're always building something new. Stay tuned.",
     "platforms": ["iOS", "Android", "Flutter"],
-    "coverImage": "images/projects/placeholder-one/cover.png",
+    "coverImage": "assets/images/projects/placeholder-one/cover.png",
     "githubUrl": "",
     "challenge": "Details coming soon.",
     "solution": "Details coming soon.",
@@ -115,10 +115,10 @@
       {"label": "Status", "value": "Soon"}
     ],
     "gallery": [
-      {"path": "images/projects/placeholder-one/gallery_1.png", "size": "small"},
-      {"path": "images/projects/placeholder-one/gallery_2.png", "size": "small"},
-      {"path": "images/projects/placeholder-one/gallery_3.png", "size": "tall"},
-      {"path": "images/projects/placeholder-one/gallery_4.png", "size": "large"}
+      {"path": "assets/images/projects/placeholder-one/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/placeholder-one/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/placeholder-one/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/placeholder-one/gallery_4.png", "size": "large"}
     ],
     "nextProjectSlug": "placeholder-two"
   },
@@ -129,7 +129,7 @@
     "shortDescription": "Another project from Flamingo — details coming soon.",
     "tagline": "We're always building something new. Stay tuned.",
     "platforms": ["iOS", "Android", "Flutter"],
-    "coverImage": "images/projects/placeholder-two/cover.png",
+    "coverImage": "assets/images/projects/placeholder-two/cover.png",
     "githubUrl": "",
     "challenge": "Details coming soon.",
     "solution": "Details coming soon.",
@@ -138,10 +138,10 @@
       {"label": "Status", "value": "Soon"}
     ],
     "gallery": [
-      {"path": "images/projects/placeholder-two/gallery_1.png", "size": "small"},
-      {"path": "images/projects/placeholder-two/gallery_2.png", "size": "small"},
-      {"path": "images/projects/placeholder-two/gallery_3.png", "size": "tall"},
-      {"path": "images/projects/placeholder-two/gallery_4.png", "size": "large"}
+      {"path": "assets/images/projects/placeholder-two/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/placeholder-two/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/placeholder-two/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/placeholder-two/gallery_4.png", "size": "large"}
     ],
     "nextProjectSlug": "my-coffee-shop"
   }

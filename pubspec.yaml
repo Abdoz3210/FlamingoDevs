@@ -60,12 +60,16 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
-
   assets:
     - assets/data/projects.json
     - assets/data/services.json
     - assets/images/logo/
-    - assets/images/projects/
+    - assets/images/projects/my-coffee-shop/
+    - assets/images/projects/weather-app-ios/
+    - assets/images/projects/money-tracker-ios/
+    - assets/images/projects/news-cloud-app/
+    - assets/images/projects/placeholder-one/
+    - assets/images/projects/placeholder-two/
 
   fonts:
     - family: Origami

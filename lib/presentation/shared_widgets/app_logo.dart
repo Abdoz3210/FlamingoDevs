@@ -12,8 +12,8 @@ class AppLogo extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness;
     // final textColor = Theme.of(context).colorScheme.onSurface;
     final assetPath = isDark
-        ? 'images/logo/icon_dark.png'
-        : 'images/logo/icon_light.png';
+        ? 'assets/images/logo/icon_dark.png'
+        : 'assets/images/logo/icon_light.png';
 
     return Row(
       mainAxisSize: MainAxisSize.min,

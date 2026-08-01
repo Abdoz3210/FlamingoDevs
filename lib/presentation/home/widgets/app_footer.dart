@@ -18,51 +18,47 @@ class _AppFooterState extends State<AppFooter> {
     (
       'TikTok',
       'https://www.tiktok.com/@flamingodevsofficial',
-      'images/logo/icons8-tiktok-50.png',
+      'assets/images/logo/icons8-tiktok-50.png',
     ),
     (
       'Instagram',
       'https://www.instagram.com/flamingodevsofficial/',
-      'images/logo/icons8-instagram-50.png',
+      'assets/images/logo/icons8-instagram-50.png',
     ),
     (
       'X / Twitter',
       'https://x.com/FlamingoDevs',
-      'images/logo/icons8-x-50.png',
+      'assets/images/logo/icons8-x-50.png',
     ),
     (
       'LinkedIn',
       'https://linkedin.com/flamingo-devs-official',
-      'images/logo/icons8-linkedin-2-50.png',
+      'assets/images/logo/icons8-linkedin-2-50.png',
     ),
-
     (
       'Fiverr',
       'https://www.fiverr.com/s/rEWarQj',
-      'images/logo/icons8-fiverr-50.png',
+      'assets/images/logo/icons8-fiverr-50.png',
     ),
     (
       'Freelancer',
       'https://www.freelancer.com/u/flamingodevs',
-      'images/logo/pngegg.png',
+      'assets/images/logo/pngegg.png',
     ),
-
     (
       'Upwork',
       'https://www.upwork.com/freelancers/~012c563d8b6649e09f',
-      'images/logo/icons8-upwork-50.png',
+      'assets/images/logo/icons8-upwork-50.png',
     ),
-
     (
       'WhatsApp',
       'https://wa.me/201033388204',
-      'images/logo/icons8-whatsapp-50.png',
+      'assets/images/logo/icons8-whatsapp-50.png',
     ),
-
-    ('Discord', '', 'images/logo/icons8-discord-50.png'),
-    ('Github', '', 'images/logo/icons8-github-50.png'),
-    ('Figma', '', 'images/logo/icons8-figma-50.png'),
-    ('Behance', '', 'images/logo/icons8-behance-50.png'),
+    ('Discord', '', 'assets/images/logo/icons8-discord-50.png'),
+    ('Github', '', 'assets/images/logo/icons8-github-50.png'),
+    ('Figma', '', 'assets/images/logo/icons8-figma-50.png'),
+    ('Behance', '', 'assets/images/logo/icons8-behance-50.png'),
   ];
 
   static const _legal = [
