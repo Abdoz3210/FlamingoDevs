@@ -15,6 +15,9 @@ class Responsive {
   static bool isDesktop(BuildContext context) =>
       MediaQuery.sizeOf(context).width >= AppSizes.tablet;
 
+  static bool isTouch(BuildContext context) =>
+      isMobile(context) || isTablet(context);
+
   static double sideMargin(BuildContext context) =>
       isMobile(context) ? AppSizes.marginMobile : AppSizes.marginDesktop;
 

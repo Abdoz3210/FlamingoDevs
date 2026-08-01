@@ -58,18 +58,21 @@ class _AppHeaderState extends State<AppHeader> {
           ),
           child: Row(
             children: [
-              GestureDetector(
-                onTap: () {
-                  if (widget.isProjectPage) {
-                    context.goNamed(RouterNames.home);
-                  } else {
-                    widget.scrollservice.scrollTo(HomeSection.hero);
-                  }
-                },
-                child: const AppLogo(size: 82),
-              ),
-              Spacer(),
               if (!isMobile) ...[
+                GestureDetector(
+                  onTap: () {
+                    if (widget.isProjectPage) {
+                      context.goNamed(RouterNames.home);
+                    } else {
+                      widget.scrollservice.scrollTo(HomeSection.hero);
+                    }
+                  },
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(),
+                    child: const AppLogo(size: 82),
+                  ),
+                ),
+                Spacer(),
                 for (final item in _navItems)
                   _NavLink(
                     label: item.$2,
@@ -84,6 +87,20 @@ class _AppHeaderState extends State<AppHeader> {
                   onPressed: () => _goto(HomeSection.contact),
                 ),
               ] else ...[
+                GestureDetector(
+                  onTap: () {
+                    if (widget.isProjectPage) {
+                      context.goNamed(RouterNames.home);
+                    } else {
+                      widget.scrollservice.scrollTo(HomeSection.hero);
+                    }
+                  },
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 100),
+                    child: const AppLogo(size: 22),
+                  ),
+                ),
+                Spacer(),
                 const ThemeToggleButton(),
                 IconButton(
                   onPressed: () => setState(() => _menuOpen = !_menuOpen),
