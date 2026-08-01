@@ -95,10 +95,7 @@ class _AppHeaderState extends State<AppHeader> {
                       widget.scrollservice.scrollTo(HomeSection.hero);
                     }
                   },
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 100),
-                    child: const AppLogo(size: 22),
-                  ),
+                  child: const AppLogo(size: 22),
                 ),
                 Spacer(),
                 const ThemeToggleButton(),

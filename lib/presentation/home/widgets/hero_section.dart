@@ -75,7 +75,15 @@ class _HeroSectionState extends State<HeroSection>
 
   Widget _buildMobile(BuildContext context, TextStyle? headlineStyle) {
     final colors = Theme.of(context).colorScheme;
-    return _buildContent(context, headlineStyle, colors);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Column(
+      children: [
+        Center(child: _HoverLogo(isDark: isDark)),
+        const SizedBox(height: 32),
+
+        _buildContent(context, headlineStyle, colors),
+      ],
+    );
   }
 
   Widget _buildContent(
