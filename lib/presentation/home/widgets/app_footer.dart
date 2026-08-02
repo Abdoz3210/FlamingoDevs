@@ -113,18 +113,41 @@ class _AppFooterState extends State<AppFooter> {
   }
 
   Widget _buildMobile(BuildContext context) {
-    return Row();
+    return Column(
+      children: [
+        Divider(height: 5),
+        const SizedBox(height: 16),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(flex: 2, child: _buildBrand(context)),
+            Expanded(flex: 2, child: _buildLegal(context)),
+
+            // Expanded(flex: 2, child: _buildNewsletter(context)),
+            // _buildNewsletter(context),
+          ],
+        ),
+        Expanded(flex: 3, child: _buildSocial(context)),
+      ],
+    );
   }
 
   Widget _buildDesktop(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        Expanded(flex: 2, child: _buildBrand(context)),
-        Expanded(flex: 2, child: _buildLegal(context)),
-        Expanded(flex: 3, child: _buildSocial(context)),
-        // Expanded(flex: 2, child: _buildNewsletter(context)),
-        // _buildNewsletter(context),
+        Divider(height: 5),
+        const SizedBox(height: 16),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(flex: 2, child: _buildBrand(context)),
+            Expanded(flex: 2, child: _buildLegal(context)),
+            Expanded(flex: 3, child: _buildSocial(context)),
+            // Expanded(flex: 2, child: _buildNewsletter(context)),
+            // _buildNewsletter(context),
+          ],
+        ),
       ],
     );
   }
