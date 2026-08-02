@@ -1,6 +1,8 @@
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
 import 'package:bma_portfolio/core/router/router_names.dart';
+import 'package:bma_portfolio/core/utils/responsive.dart';
 import 'package:bma_portfolio/data/models/project_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' show pi;
 
@@ -53,41 +55,81 @@ class _ProjectCardState extends State<ProjectCard>
   @override
   Widget build(BuildContext context) {
     // final colors = Theme.of(context).colorScheme;
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() {
-        _onHoverChanged(true);
-      }),
-      onExit: (_) => setState(() {
-        _onHoverChanged(false);
-      }),
+    final isMobile = Responsive.isMobile(context);
+    final isTablet = Responsive.isTablet(context);
+    final isDesktop = Responsive.isDesktop(context);
+    if (isDesktop) {
+      return MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() {
+          _onHoverChanged(true);
+        }),
+        onExit: (_) => setState(() {
+          _onHoverChanged(false);
+        }),
 
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          final angle = _animation.value + pi;
-          final showBack = _animation.value > 0.5;
-          final tilt = showBack ? (angle - pi * 1.31) : angle * 2;
-          return Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..rotateY(tilt),
-            child: showBack
-                ? GestureDetector(
-                    onTap: () => {
-                      context.goNamed(
-                        RouterNames.projectDetails,
-                        pathParameters: {'slug': widget.project.slug},
-                      ),
-                    },
-                    child: _BackFace(project: widget.project),
-                  )
-                : _FrontFace(project: widget.project),
-          );
-        },
-      ),
-    );
+        child: AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            final angle = _animation.value + pi;
+            final showBack = _animation.value > 0.5;
+            final tilt = showBack ? (angle - pi * 1.31) : angle * 2;
+            return Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, 0.001)
+                ..rotateY(tilt),
+              child: showBack
+                  ? GestureDetector(
+                      onTap: () => {
+                        context.goNamed(
+                          RouterNames.projectDetails,
+                          pathParameters: {'slug': widget.project.slug},
+                        ),
+                      },
+                      child: _BackFace(project: widget.project),
+                    )
+                  : _FrontFace(project: widget.project),
+            );
+          },
+        ),
+      );
+    } else {
+      return GestureDetector(
+        child: InkWell(
+          onTap: () {
+            if (_flipped) {
+              context.goNamed(
+                RouterNames.projectDetails,
+                pathParameters: {'slug': widget.project.slug},
+              );
+            } else {
+              setState(() {
+                _flipped = true;
+              });
+              _controller.forward();
+            }
+          },
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, chiled) {
+              final angle = _animation.value + pi;
+              final showBack = _animation.value > 0.5;
+              final tilt = showBack ? (angle - pi * 1.31) : angle * 2;
+              return Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..rotateY(tilt),
+                child: showBack
+                    ? _BackFace(project: widget.project)
+                    : _FrontFace(project: widget.project),
+              );
+            },
+          ),
+        ),
+      );
+    }
   }
 }
 
@@ -161,6 +203,17 @@ class _BackFace extends StatelessWidget {
                         ),
                       ],
                     ),
+                    if (Responsive.isMobile(context))
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(
+                          "Tap again to open",
+                          style: AppTypogragh.mono(
+                            color: colors.onSurfaceVariant,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
