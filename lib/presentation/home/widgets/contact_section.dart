@@ -24,13 +24,21 @@ class ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
+    final vh = MediaQuery.sizeOf(context).height;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Responsive.sideMargin(context),
-        vertical: isMobile ? 40 : 80,
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: vh),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+            Responsive.sideMargin(context),
+            isMobile ? 88 : 112,
+            Responsive.sideMargin(context),
+            isMobile ? 64 : 120,
+          ),
+          child: isMobile ? _buildMobile(context) : _buildDesktop(context),
+        ),
       ),
-      child: isMobile ? _buildMobile(context) : _buildDesktop(context),
     );
   }
 
@@ -62,15 +70,15 @@ class ContactSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SectionTitle(
-          eyebrow: 'Get In Touch',
-          title: "Let's build something\nextraordinary.",
+          eyebrow: 'Contact',
+          title: "Let's fold something",
+          accent: 'together.',
         ),
         const SizedBox(height: 16),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 360),
+          constraints: const BoxConstraints(maxWidth: 380),
           child: Text(
-            "Ready to elevate your digital presence? "
-            "We're currently taking on new projects for Q3 2026.",
+            'Tell us what you want to build and we will get back to you.',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
@@ -326,7 +334,7 @@ class _ContactFormState extends State<_ContactForm> {
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            value: _projectType,
+            initialValue: _projectType,
             isExpanded: true,
             decoration: const InputDecoration(isDense: true),
             items: _projectTypes

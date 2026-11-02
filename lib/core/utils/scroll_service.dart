@@ -17,9 +17,6 @@ class ScrollService {
 
   void scrollTo(HomeSection section) {
     if (controller == null || !controller!.hasClients) {
-      // print(
-      //   "⚠️ ScrollService Error: Controller is not attached to any scroll view!",
-      // );
       return;
     }
 
@@ -35,19 +32,20 @@ class ScrollService {
     final viewport = RenderAbstractViewport.maybeOf(renderBox);
     if (viewport == null) return;
 
-    // 2. Ask the viewport for the precise offset required to align the target widget
-    // at the top (alignment: 0.0)
+    // 2. Ask the viewport for the offset that puts the target at the top.
+    // The keys sit on each sheet's Transform, so this is the sheet's natural
+    // position even while it is translated into its sticky place.
     final revealedOffset = viewport.getOffsetToReveal(renderBox, 0.0).offset;
 
-    // 3. Apply your padding modification (-80) and boundary boundaries
-    final target = (revealedOffset - 80).clamp(
-      0.0,
-      controller!.position.maxScrollExtent,
-    );
+    // 3. Sheets stick to the top of the screen, so no extra padding is needed.
+    final max = controller!.position.maxScrollExtent;
+    final target = revealedOffset < 0
+        ? 0.0
+        : (revealedOffset > max ? max : revealedOffset);
 
     controller!.animateTo(
       target,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 700),
       curve: Curves.easeInOutCubic,
     );
   }

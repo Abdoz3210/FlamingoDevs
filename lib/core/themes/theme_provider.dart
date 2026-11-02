@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  static const _key = 'bma_theme)mode';
+  // New key: visitors who saved the old blue-theme mode start on light.
+  static const _key = 'flamingo_theme_mode';
 
-  ThemeMode _mode = ThemeMode.dark;
+  ThemeProvider() {
+    _load();
+  }
+
+  ThemeMode _mode = ThemeMode.light;
   ThemeMode get mode => _mode;
   bool get isDark => _mode == ThemeMode.dark;
 
-
   Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
-    final saved = prefs.get(_key);
-    if (saved == 'light') {
-      _mode = ThemeMode.light;
+    final saved = prefs.getString(_key);
+    if (saved == 'dark') {
+      _mode = ThemeMode.dark;
       notifyListeners();
     }
   }

@@ -1,103 +1,132 @@
 import 'package:flutter/material.dart';
 
+/// Flamingo / origami palette.
+/// Light (warm paper) is the default theme, dark is a deep plum.
 class AppColors {
   AppColors._();
 
-  // ── DARK THEME — from design tokens ─────────────────────────
-  static const darkBackground = Color(0xFF10141A);
-  static const darkSurface = Color(0xFF10141A);
-  static const darkSurfaceDim = Color(0xFF10141A);
-  static const darkSurfaceBright = Color(0xFF353940);
-  static const darkSurfaceContainerLowest = Color(0xFF0A0E14);
-  static const darkSurfaceContainerLow = Color(0xFF181C22);
-  static const darkSurfaceContainer = Color(0xFF1C2026);
-  static const darkSurfaceContainerHigh = Color(0xFF262A31);
-  static const darkSurfaceContainerHighest = Color(0xFF31353C);
-  static const darkSurfaceVariant = Color(0xFF31353C);
-  static const darkSurfaceTint = Color(0xFFADC6FF);
-  static const darkOnBackground = Color(0xFFDFE2EB);
-  static const darkOnSurface = Color(0xFFDFE2EB);
-  static const darkOnSurfaceVariant = Color(0xFFC1C6D7);
-  static const darkInverseSurface = Color(0xFFDFE2EB);
-  static const darkInverseOnSurface = Color(0xFF2D3137);
-  static const darkOutline = Color(0xFF8B90A0);
-  static const darkOutlineVariant = Color(0xFF414755);
+  // ── Light: paper ────────────────────────────────────────────
+  static const lightBackground = Color(0xFFFFF7F2); // page, first sheet
+  static const lightSurfaceLow = Color(0xFFFFECE6); // second sheet, tints
+  static const lightSheetAlt = Color(0xFFFFF1E9); // third sheet
+  static const lightSurface = Color(0xFFFFFFFF); // cards
+  static const lightChip = Color(0xFFFFE3E8);
+  static const lightBorder = Color(0xFFF2D3D9);
+  static const lightOutline = Color(0xFFC9A3AE);
+  static const lightInk = Color(0xFF2A1722); // headline text
+  static const lightMuted = Color(0xFF6B4A58); // body text
+  static const lightAccent = Color(0xFFC2305A); // links, labels
+  static const lightFold = Color(0xFFFFC2CF); // folded corner flap
+  static const lightFacetA = Color(0xFFFFE0E6);
+  static const lightFacetB = Color(0xFFFFCDBD);
+  static const lightFooter = Color(0xFF2A1722);
+  static const lightShadow = Color(0x332A1722);
 
-  static const darkPrimary = Color(0xFFADC6FF);
-  static const darkOnPrimary = Color(0xFF002E69);
-  static const darkPrimaryContainer = Color(0xFF4B8EFF);
-  static const darkOnPrimaryContainer = Color(0xFF00285C);
-  static const darkInversePrimary = Color(0xFF005BC1);
-  static const darkPrimaryFixed = Color(0xFFD8E2FF);
-  static const darkPrimaryFixedDim = Color(0xFFADC6FF);
-  static const darkOnPrimaryFixed = Color(0xFF001A41);
-  static const darkOnPrimaryFixedVariant = Color(0xFF004493);
+  // ── Dark: plum ──────────────────────────────────────────────
+  static const darkBackground = Color(0xFF1B0F1A);
+  static const darkSurfaceLow = Color(0xFF241421);
+  static const darkSheetAlt = Color(0xFF20121D);
+  static const darkSurface = Color(0xFF2D1829);
+  static const darkChip = Color(0xFF3D2238);
+  static const darkBorder = Color(0xFF4A2C44);
+  static const darkOutline = Color(0xFF86607A);
+  static const darkInk = Color(0xFFFFEFF2);
+  static const darkMuted = Color(0xFFD9B3C0);
+  static const darkAccent = Color(0xFFFF8FAB);
+  static const darkFold = Color(0xFF5A2F52);
+  static const darkFacetA = Color(0xFF3A1E36);
+  static const darkFacetB = Color(0xFF4B2740);
+  static const darkFooter = Color(0xFF120912);
+  static const darkShadow = Color(0x80000000);
 
-  static const darkSecondary = Color(0xFFBDF4FF);
-  static const darkOnSecondary = Color(0xFF00363D);
-  static const darkSecondaryContainer = Color(0xFF00E3FD);
-  static const darkOnSecondaryContainer = Color(0xFF00616D);
-  static const darkSecondaryFixed = Color(0xFF9CF0FF);
-  static const darkSecondaryFixedDim = Color(0xFF00DAF3);
-  static const darkOnSecondaryFixed = Color(0xFF001F24);
-  static const darkOnSecondaryFixedVariant = Color(0xFF004F58);
+  // ── Shared ──────────────────────────────────────────────────
+  /// Text on gradient buttons (dark ink on the pink gradient).
+  static const onGradient = Color(0xFF2A1722);
 
-  static const darkTertiary = Color(0xFFC1C6D6);
-  static const darkOnTertiary = Color(0xFF2B303D);
-  static const darkTertiaryContainer = Color(0xFF8B91A0);
-  static const darkOnTertiaryContainer = Color(0xFF242A36);
-  static const darkTertiaryFixed = Color(0xFFDDE2F3);
-  static const darkTertiaryFixedDim = Color(0xFFC1C6D6);
-  static const darkOnTertiaryFixed = Color(0xFF161C27);
-  static const darkOnTertiaryFixedVariant = Color(0xFF414754);
+  /// Plum used to dim a sheet while the next one covers it.
+  static const dim = Color(0xFF2A1722);
 
-  static const darkError = Color(0xFFFFB4AB);
-  static const darkOnError = Color(0xFF690005);
-  static const darkErrorContainer = Color(0xFF93000A);
-  static const darkOnErrorContainer = Color(0xFFFFDAD6);
+  // Origami mark colors.
+  static const markCoral = Color(0xFFFF9E7A);
+  static const markPink = Color(0xFFFF5C8A);
+  static const markDeep = Color(0xFFC2305A);
+}
 
-  // Spotlight gradient — dark mode.
-  // ONLY used on: logo mark, primary CTA buttons, 1–2 hero headline words.
-  // Never as a background fill.
-  static const darkGradient = [Color(0xFF00C6FF), Color(0xFF00E5FF)];
+/// Origami-only colors that Material's ColorScheme has no slot for.
+/// Read with `OrigamiColors.of(context)`.
+@immutable
+class OrigamiColors extends ThemeExtension<OrigamiColors> {
+  final Color fold;
+  final Color facetA;
+  final Color facetB;
+  final Color chip;
+  final Color footer;
+  final Color sheetAlt;
+  final Color shadow;
 
-  // ── LIGHT THEME — mirrored structure, inverted values ───────
-  static const lightBackground = Color(0xFFFFFFFF);
-  static const lightSurface = Color(0xFFFFFFFF);
-  static const lightSurfaceContainerLowest = Color(0xFFFFFFFF);
-  static const lightSurfaceContainerLow = Color(0xFFF7F8FA);
-  static const lightSurfaceContainer = Color(0xFFF2F3F6);
-  static const lightSurfaceContainerHigh = Color(0xFFEBEDF1);
-  static const lightSurfaceContainerHighest = Color(0xFFE3E6EC);
-  static const lightOnSurface = Color(0xFF0A0E14);
-  static const lightOnSurfaceVariant = Color(0xFF4B5161);
-  static const lightInverseSurface = Color(0xFF10141A);
-  static const lightInverseOnSurface = Color(0xFFDFE2EB);
-  static const lightOutline = Color(0xFFB7BBC4);
-  static const lightOutlineVariant = Color(0xFFE2E4E9);
-  static const lightSurfaceTint = Color(0xFF007AFF);
+  const OrigamiColors({
+    required this.fold,
+    required this.facetA,
+    required this.facetB,
+    required this.chip,
+    required this.footer,
+    required this.sheetAlt,
+    required this.shadow,
+  });
 
-  static const lightPrimary = Color(0xFF005BC1);
-  static const lightOnPrimary = Color(0xFFFFFFFF);
-  static const lightPrimaryContainer = Color(0xFFD8E2FF);
-  static const lightOnPrimaryContainer = Color(0xFF001A41);
-  static const lightInversePrimary = Color(0xFFADC6FF);
+  static const light = OrigamiColors(
+    fold: AppColors.lightFold,
+    facetA: AppColors.lightFacetA,
+    facetB: AppColors.lightFacetB,
+    chip: AppColors.lightChip,
+    footer: AppColors.lightFooter,
+    sheetAlt: AppColors.lightSheetAlt,
+    shadow: AppColors.lightShadow,
+  );
 
-  static const lightSecondary = Color(0xFF00616D);
-  static const lightOnSecondary = Color(0xFFFFFFFF);
-  static const lightSecondaryContainer = Color(0xFFBDF4FF);
-  static const lightOnSecondaryContainer = Color(0xFF00363D);
+  static const dark = OrigamiColors(
+    fold: AppColors.darkFold,
+    facetA: AppColors.darkFacetA,
+    facetB: AppColors.darkFacetB,
+    chip: AppColors.darkChip,
+    footer: AppColors.darkFooter,
+    sheetAlt: AppColors.darkSheetAlt,
+    shadow: AppColors.darkShadow,
+  );
 
-  static const lightTertiary = Color(0xFF414754);
-  static const lightOnTertiary = Color(0xFFFFFFFF);
-  static const lightTertiaryContainer = Color(0xFFDDE2F3);
-  static const lightOnTertiaryContainer = Color(0xFF161C27);
+  static OrigamiColors of(BuildContext context) =>
+      Theme.of(context).extension<OrigamiColors>() ?? light;
 
-  static const lightError = Color(0xFFBA1A1A);
-  static const lightOnError = Color(0xFFFFFFFF);
-  static const lightErrorContainer = Color(0xFFFFDAD6);
-  static const lightOnErrorContainer = Color(0xFF410002);
+  @override
+  OrigamiColors copyWith({
+    Color? fold,
+    Color? facetA,
+    Color? facetB,
+    Color? chip,
+    Color? footer,
+    Color? sheetAlt,
+    Color? shadow,
+  }) => OrigamiColors(
+    fold: fold ?? this.fold,
+    facetA: facetA ?? this.facetA,
+    facetB: facetB ?? this.facetB,
+    chip: chip ?? this.chip,
+    footer: footer ?? this.footer,
+    sheetAlt: sheetAlt ?? this.sheetAlt,
+    shadow: shadow ?? this.shadow,
+  );
 
-  // Spotlight gradient — light mode. Deep navy to sapphire.
-  static const lightGradient = [Color(0xFF050A15), Color(0xFF007AFF)];
+  @override
+  OrigamiColors lerp(ThemeExtension<OrigamiColors>? other, double t) {
+    if (other is! OrigamiColors) return this;
+    return OrigamiColors(
+      fold: Color.lerp(fold, other.fold, t)!,
+      facetA: Color.lerp(facetA, other.facetA, t)!,
+      facetB: Color.lerp(facetB, other.facetB, t)!,
+      chip: Color.lerp(chip, other.chip, t)!,
+      footer: Color.lerp(footer, other.footer, t)!,
+      sheetAlt: Color.lerp(sheetAlt, other.sheetAlt, t)!,
+      shadow: Color.lerp(shadow, other.shadow, t)!,
+    );
+  }
 }
