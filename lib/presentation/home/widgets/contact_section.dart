@@ -374,8 +374,8 @@ class _ContactFormState extends State<_ContactForm> {
               alignment: Alignment.centerLeft,
               child: PrimaryButton(
                 label: _state == _SubmitState.error
-                    ? 'TRY AGAIN'
-                    : 'SEND MESSAGE',
+                    ? 'Try again'
+                    : 'Send message',
                 loading: _state == _SubmitState.loading,
                 onPressed: _submit,
               ),

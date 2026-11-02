@@ -6,8 +6,13 @@ import 'package:bma_portfolio/presentation/shared_widgets/origami_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-/// A project on the home page: its cover with a folded corner, the title and
-/// an "Open" cue. Tapping unfolds the cover into the project page.
+/// Height of the folded corner on a project card.
+const double _kCardFold = 28;
+
+/// A project on the home page: a paper card with cover art, a phone peeking
+/// out of the bottom, the title and an "Open" cue. Hover or focus it and the
+/// card lifts, the folds drift and the phone rises. Tapping unfolds the cover
+/// into the project page.
 class ProjectCard extends StatefulWidget {
   final ProjectModel project;
   const ProjectCard({super.key, required this.project});
@@ -31,6 +36,7 @@ class _ProjectCardState extends State<ProjectCard> {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final p = widget.project;
+    final palette = ProjectPalette.forSlug(p.slug);
     final lit = _hovered || _focused;
 
     return FocusableActionDetector(
@@ -48,53 +54,84 @@ class _ProjectCardState extends State<ProjectCard> {
       child: Semantics(
         button: true,
         label: 'Open ${p.title}',
+        excludeSemantics: true,
         child: GestureDetector(
           onTap: _open,
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 220),
-            curve: Curves.easeOut,
-            transform: Matrix4.translationValues(0, lit ? -6 : 0, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProjectCover(project: p),
-                const SizedBox(height: 16),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            p.title,
-                            style: Theme.of(context).textTheme.headlineSmall,
+            duration: const Duration(milliseconds: 300),
+            curve: kFoldCurve,
+            transform: Matrix4.translationValues(0, lit ? -5 : 0, 0),
+            child: FoldedCard(
+              fold: _kCardFold,
+              padding: EdgeInsets.zero,
+              background: scheme.surface,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 4 / 3,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        ProjectCover(project: p, aspectRatio: null, lit: lit),
+                        IgnorePointer(
+                          child: ProjectMiniPhone(palette: palette, lit: lit),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                p.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                p.category,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTypogragh.mono(
+                                  color: scheme.onSurfaceVariant,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            p.category.toUpperCase(),
+                        ),
+                        const SizedBox(width: 10),
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.ease,
+                          transform: Matrix4.translationValues(
+                            lit ? 4 : 0,
+                            0,
+                            0,
+                          ),
+                          child: Text(
+                            'Open →',
                             style: AppTypogragh.mono(
-                              color: scheme.onSurfaceVariant,
+                              color: scheme.primary,
                               fontSize: 11,
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    AnimatedSlide(
-                      duration: const Duration(milliseconds: 220),
-                      offset: Offset(lit ? 0.15 : 0, 0),
-                      child: Text(
-                        'OPEN →',
-                        style: AppTypogragh.mono(
-                          color: scheme.primary,
-                          fontSize: 12,
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -103,41 +140,59 @@ class _ProjectCardState extends State<ProjectCard> {
   }
 }
 
-/// Inert card for the "Coming Soon" entries in projects.json.
+/// Inert card for the "Coming Soon" entries in projects.json: a dashed paper
+/// outline with nothing inside yet.
 class ComingSoonCard extends StatelessWidget {
   const ComingSoonCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AspectRatio(
-          aspectRatio: 16 / 10,
-          child: FoldedCard(
-            fold: 28,
-            padding: EdgeInsets.zero,
-            background: scheme.surfaceContainerLow,
-            child: Center(
-              child: Text(
-                'COMING SOON',
-                style: AppTypogragh.mono(
-                  color: scheme.onSurfaceVariant,
-                  fontSize: 12,
+    return FoldedCard(
+      fold: _kCardFold,
+      padding: EdgeInsets.zero,
+      background: Colors.transparent,
+      dashed: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AspectRatio(
+            aspectRatio: 4 / 3,
+            child: ColoredBox(
+              color: scheme.surfaceContainerLow,
+              child: Center(
+                child: Text(
+                  'Coming soon',
+                  style: AppTypogragh.mono(
+                    color: scheme.onSurfaceVariant,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Text('Next project', style: Theme.of(context).textTheme.headlineSmall),
-        const SizedBox(height: 4),
-        Text(
-          'IN PROGRESS',
-          style: AppTypogragh.mono(color: scheme.onSurfaceVariant, fontSize: 11),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Next project',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'In progress',
+                  style: AppTypogragh.mono(
+                    color: scheme.onSurfaceVariant,
+                    fontSize: 11,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

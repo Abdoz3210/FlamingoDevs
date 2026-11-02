@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/paper_edge.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,9 @@ class FoldedCard extends StatelessWidget {
   final Color? background;
   final Color? borderColor;
 
+  /// Draws the outline as dashes, for cards that are not filled in yet.
+  final bool dashed;
+
   const FoldedCard({
     super.key,
     required this.child,
@@ -45,6 +50,7 @@ class FoldedCard extends StatelessWidget {
     this.padding = const EdgeInsets.fromLTRB(28, 32, 28, 32),
     this.background,
     this.borderColor,
+    this.dashed = false,
   });
 
   @override
@@ -57,6 +63,7 @@ class FoldedCard extends StatelessWidget {
         fold: fold,
         flapColor: origami.fold,
         borderColor: borderColor ?? scheme.outlineVariant,
+        dashed: dashed,
       ),
       child: ClipPath(
         clipper: CutCornerClipper(fold),
@@ -74,22 +81,38 @@ class _FoldPainter extends CustomPainter {
   final double fold;
   final Color flapColor;
   final Color borderColor;
+  final bool dashed;
 
   const _FoldPainter({
     required this.fold,
     required this.flapColor,
     required this.borderColor,
+    this.dashed = false,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPath(
-      cutCornerPath(size, fold),
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1
-        ..color = borderColor,
-    );
+    final outline = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1
+      ..color = borderColor;
+    final path = cutCornerPath(size, fold);
+    if (dashed) {
+      const dash = 5.0;
+      const gap = 4.0;
+      for (final metric in path.computeMetrics()) {
+        var d = 0.0;
+        while (d < metric.length) {
+          canvas.drawPath(
+            metric.extractPath(d, math.min(d + dash, metric.length)),
+            outline,
+          );
+          d += dash + gap;
+        }
+      }
+    } else {
+      canvas.drawPath(path, outline);
+    }
 
     // The folded flap: the triangle that covers the cut corner.
     final flap = Path()
@@ -104,32 +127,8 @@ class _FoldPainter extends CustomPainter {
   bool shouldRepaint(covariant _FoldPainter old) =>
       old.fold != fold ||
       old.flapColor != flapColor ||
-      old.borderColor != borderColor;
-}
-
-// ─────────────────────────────────────────────────────────────
-// OrigamiMark: the three-fold triangle used as the brand mark.
-// ─────────────────────────────────────────────────────────────
-class OrigamiMark extends StatelessWidget {
-  final double size;
-  const OrigamiMark({super.key, this.size = 30});
-
-  @override
-  Widget build(BuildContext context) => ExcludeSemantics(
-    child: CustomPaint(size: Size(size, size), painter: const _MarkPainter()),
-  );
-}
-
-class _MarkPainter extends CustomPainter {
-  const _MarkPainter();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    paintOrigamiMark(canvas, Offset.zero & size);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+      old.borderColor != borderColor ||
+      old.dashed != dashed;
 }
 
 // ─────────────────────────────────────────────────────────────

@@ -179,7 +179,8 @@ class _AppFooterState extends State<AppFooter> {
     );
 
     final toTop = GhostButton(
-      label: '↑ BACK TO TOP',
+      compact: true,
+      label: '↑ Back to top',
       onPressed: widget.onBackToTop,
     );
 

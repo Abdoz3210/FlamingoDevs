@@ -1,4 +1,5 @@
-import 'package:bma_portfolio/core/constants/app_colors.dart';
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 // ─────────────────────────────────────────────────────────────
@@ -50,27 +51,46 @@ class ZigzagTopClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
-/// Paints the three-fold flamingo mark into [r].
-void paintOrigamiMark(Canvas canvas, Rect r, {double opacity = 1}) {
-  final s = r.width / 32;
-  Offset p(double x, double y) => Offset(r.left + x * s, r.top + y * s);
-  void tri(List<Offset> pts, Color c) => canvas.drawPath(
-    Path()..addPolygon(pts, true),
-    Paint()..color = c.withValues(alpha: opacity),
-  );
-  tri([p(16, 3), p(29, 27), p(16, 21)], AppColors.markPink);
-  tri([p(16, 3), p(3, 27), p(16, 21)], AppColors.markCoral);
-  tri([p(3, 27), p(29, 27), p(16, 21)], AppColors.markDeep);
+/// The flamingo logo as a decoded image, so the progress lines can draw it
+/// as their marker. Loaded once for the whole app.
+class FlamingoMark {
+  FlamingoMark._();
+
+  static const asset = 'assets/images/logo/flamingo_mark.png';
+
+  /// Null until the image has loaded; painters repaint when it changes.
+  static final ValueNotifier<ui.Image?> image = ValueNotifier<ui.Image?>(null);
+
+  static bool _started = false;
+
+  static void ensureLoaded() {
+    if (_started) return;
+    _started = true;
+    final stream = const AssetImage(asset).resolve(ImageConfiguration.empty);
+    late final ImageStreamListener listener;
+    listener = ImageStreamListener(
+      (info, _) {
+        // Keep our own handle so the image cache can never dispose it.
+        image.value = info.clone().image;
+        stream.removeListener(listener);
+      },
+      onError: (error, stackTrace) {
+        _started = false;
+        stream.removeListener(listener);
+      },
+    );
+    stream.addListener(listener);
+  }
 }
 
 class ZigzagLinePainter extends CustomPainter {
-  const ZigzagLinePainter({
+  ZigzagLinePainter({
     required this.progress,
     required this.baseColor,
     required this.accentColor,
     this.showMarker = true,
     this.markerOpacity = 1,
-  });
+  }) : super(repaint: FlamingoMark.image);
 
   /// 0..1: how much of the line is drawn in the accent color.
   final double progress;
@@ -79,7 +99,10 @@ class ZigzagLinePainter extends CustomPainter {
   final bool showMarker;
   final double markerOpacity;
 
-  static const double _markerSize = 18;
+  /// The flamingo stands on the line, so it is drawn this tall and its feet
+  /// rest at [_feetY].
+  static const double _markerHeight = 22;
+  static const double _feetY = 13.5;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -114,14 +137,19 @@ class ZigzagLinePainter extends CustomPainter {
       }
     }
 
-    if (showMarker && markerOpacity > 0.01) {
-      // The marker slides along the line and never leaves the edges:
+    final bird = FlamingoMark.image.value;
+    if (showMarker && markerOpacity > 0.01 && bird != null) {
+      final w = _markerHeight * bird.width / bird.height;
+      // The bird slides along the line and never leaves the edges:
       // left = p * 100%, shifted back by p * its own width.
-      final x = (size.width - _markerSize) * p;
-      paintOrigamiMark(
-        canvas,
-        Rect.fromLTWH(x, 0, _markerSize, _markerSize),
-        opacity: markerOpacity,
+      final x = (size.width - w) * p;
+      canvas.drawImageRect(
+        bird,
+        Rect.fromLTWH(0, 0, bird.width.toDouble(), bird.height.toDouble()),
+        Rect.fromLTWH(x, _feetY - _markerHeight, w, _markerHeight),
+        Paint()
+          ..filterQuality = FilterQuality.medium
+          ..color = Color.fromRGBO(255, 255, 255, markerOpacity.clamp(0.0, 1.0)),
       );
     }
   }
@@ -156,6 +184,7 @@ class ZigzagLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    FlamingoMark.ensureLoaded();
     return ExcludeSemantics(
       child: IgnorePointer(
         child: SizedBox(

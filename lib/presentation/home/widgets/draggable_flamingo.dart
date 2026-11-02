@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/paper_edge.dart';
@@ -26,6 +27,11 @@ class _DraggableFlamingoState extends State<DraggableFlamingo>
     with TickerProviderStateMixin {
   static const _pinkAsset = 'assets/images/flamingo/flamingo_pink.webp';
   static const _plumAsset = 'assets/images/flamingo/flamingo_plum.webp';
+
+  // Width / height of each picture, so the box around the bird is its real
+  // size and not wider than the bird itself.
+  static const _pinkAspect = 668 / 1100;
+  static const _plumAspect = 898 / 1100;
 
   late final Ticker _ticker = createTicker(_tick);
   late final AnimationController _float = AnimationController(
@@ -76,7 +82,8 @@ class _DraggableFlamingoState extends State<DraggableFlamingo>
     if (ro is! RenderBox || !ro.hasSize) return;
     final screen = MediaQuery.sizeOf(context);
     final origin = ro.localToGlobal(Offset.zero);
-    final birdW = widget.height * 0.7;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final birdW = widget.height * (dark ? _plumAspect : _pinkAspect);
     final left = origin.dx + (ro.size.width - birdW) / 2;
     _minX = -left;
     _maxX = screen.width - (left + birdW);
@@ -219,34 +226,71 @@ class _DraggableFlamingoState extends State<DraggableFlamingo>
     final reduced = MediaQuery.disableAnimationsOf(context);
     final h = widget.height;
 
-    final bird = SizedBox(
-      height: h,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          AnimatedOpacity(
-            opacity: isDark ? 0 : 1,
-            duration: const Duration(milliseconds: 350),
-            child: Image.asset(
-              _pinkAsset,
-              height: h,
+    final asset = isDark ? _plumAsset : _pinkAsset;
+    final aspect = isDark ? _plumAspect : _pinkAspect;
+
+    // The shadow follows the bird's outline. At rest it sits close; while the
+    // bird is held it is lifted away from the page, softer and longer.
+    final shadowInk = isDark ? const Color(0xFF000000) : const Color(0xFF2A1722);
+    final boost = isDark ? 1.5 : 1.0;
+    Widget shadow({
+      required bool active,
+      required double dy,
+      required double sigma,
+      required double alpha,
+    }) {
+      return IgnorePointer(
+        child: AnimatedOpacity(
+          opacity: active ? 1 : 0,
+          duration: const Duration(milliseconds: 250),
+          child: Transform.translate(
+            offset: Offset(0, dy),
+            child: ImageFiltered(
+              imageFilter: ui.ImageFilter.blur(
+                sigmaX: sigma,
+                sigmaY: sigma,
+                tileMode: TileMode.decal,
+              ),
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  shadowInk.withValues(alpha: math.min(1.0, alpha * boost)),
+                  BlendMode.srcIn,
+                ),
+                child: Image.asset(
+                  asset,
+                  fit: BoxFit.contain,
+                  excludeFromSemantics: true,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Switching theme swaps the whole bird, shadow included, with a fade.
+    final bird = AnimatedSwitcher(
+      duration: const Duration(milliseconds: 350),
+      child: RepaintBoundary(
+        key: ValueKey<bool>(isDark),
+        child: SizedBox(
+        width: h * aspect,
+        height: h,
+        child: Stack(
+          clipBehavior: Clip.none,
+          fit: StackFit.expand,
+          children: [
+            shadow(active: !_dragging, dy: 20, sigma: 11, alpha: 0.30),
+            shadow(active: _dragging, dy: 38, sigma: 16, alpha: 0.40),
+            Image.asset(
+              asset,
               fit: BoxFit.contain,
               filterQuality: FilterQuality.medium,
               excludeFromSemantics: true,
             ),
-          ),
-          AnimatedOpacity(
-            opacity: isDark ? 1 : 0,
-            duration: const Duration(milliseconds: 350),
-            child: Image.asset(
-              _plumAsset,
-              height: h,
-              fit: BoxFit.contain,
-              filterQuality: FilterQuality.medium,
-              excludeFromSemantics: true,
-            ),
-          ),
-        ],
+          ],
+        ),
+      ),
       ),
     );
 
@@ -269,7 +313,9 @@ class _DraggableFlamingoState extends State<DraggableFlamingo>
                   ? SystemMouseCursors.grabbing
                   : SystemMouseCursors.grab,
               child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
+                // Translucent: the empty paper around the bird never blocks a
+                // button or link that sits behind it.
+                behavior: HitTestBehavior.translucent,
                 onPanStart: _onPanStart,
                 onPanUpdate: _onPanUpdate,
                 onPanEnd: _onPanEnd,
