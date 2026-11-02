@@ -1,11 +1,11 @@
 {
-    "name": "bma_portfolio",
-    "short_name": "bma_portfolio",
+    "name": "Flamingo Devs",
+    "short_name": "Flamingo",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFF7F2",
+    "theme_color": "#C2305A",
+    "description": "Flamingo Devs is a three-developer studio building Flutter and iOS apps and websites.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

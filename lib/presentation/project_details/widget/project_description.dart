@@ -1,6 +1,8 @@
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
 import 'package:bma_portfolio/core/utils/responsive.dart';
 import 'package:bma_portfolio/data/models/project_model.dart';
+import 'package:bma_portfolio/presentation/shared_widgets/origami_widgets.dart';
+import 'package:bma_portfolio/presentation/shared_widgets/reveal.dart';
 import 'package:flutter/material.dart';
 
 class ProjectDescription extends StatelessWidget {
@@ -46,73 +48,89 @@ class ProjectDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'The Challenge.',
-          style: Theme.of(context).textTheme.headlineMedium,
+        Reveal(
+          child: Text(
+            'The challenge',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
         ),
         const SizedBox(height: 14),
-        Text(project.challenge, style: Theme.of(context).textTheme.bodyMedium),
+        Reveal(
+          delay: const Duration(milliseconds: 100),
+          child: Text(
+            project.challenge,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
         const SizedBox(height: 36),
-        Text('The Solution', style: Theme.of(context).textTheme.headlineMedium),
+        Reveal(
+          child: Text(
+            'The solution',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ),
         const SizedBox(height: 14),
-        Text(project.solution, style: Theme.of(context).textTheme.bodyMedium),
+        Reveal(
+          delay: const Duration(milliseconds: 100),
+          child: Text(
+            project.solution,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
       ],
     );
   }
 
   Widget _buildPanel(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: colors.surfaceContainer,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: colors.outlineVariant),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'TECH STACK',
-            style: AppTypogragh.mono(color: colors.onSurfaceVariant),
-          ),
-          const SizedBox(height: 14),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: project.techStack
-                .map((t) => _TechChip(label: t))
-                .toList(),
-          ),
-          const SizedBox(height: 28),
-          Divider(color: colors.outlineVariant),
-          const SizedBox(height: 20),
-          Text(
-            'PROJECT METRICS',
-            style: AppTypogragh.mono(color: colors.onSurfaceVariant),
-          ),
-          const SizedBox(height: 16),
-          for (final metrics in project.metrics)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    metrics.label,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  Text(
-                    metrics.value,
-                    style: AppTypogragh.mono(
-                      color: colors.primary,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
+    return Reveal(
+      delay: const Duration(milliseconds: 200),
+      child: FoldedCard(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'TECH STACK',
+              style: AppTypogragh.mono(color: colors.primary, fontSize: 11),
             ),
-        ],
+            const SizedBox(height: 14),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: project.techStack
+                  .map((t) => _TechChip(label: t))
+                  .toList(),
+            ),
+            const SizedBox(height: 28),
+            Divider(color: colors.outlineVariant),
+            const SizedBox(height: 20),
+            Text(
+              'PROJECT METRICS',
+              style: AppTypogragh.mono(color: colors.primary, fontSize: 11),
+            ),
+            const SizedBox(height: 16),
+            for (final metrics in project.metrics)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      metrics.label,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      metrics.value,
+                      style: AppTypogragh.mono(
+                        color: colors.onSurface,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

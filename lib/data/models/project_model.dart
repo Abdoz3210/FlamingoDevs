@@ -59,8 +59,13 @@ class ProjectModel {
     required this.techStack,
     required this.metrics,
     required this.gallery,
-    this.nextProjectSlug, required this.githubUrl,
+    this.nextProjectSlug,
+    required this.githubUrl,
   });
+
+  /// The "Coming Soon" entries in projects.json are not real projects: they
+  /// show as inert cards and are skipped by the next-project link.
+  bool get isPlaceholder => slug.startsWith('placeholder');
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
     return ProjectModel(
@@ -80,7 +85,8 @@ class ProjectModel {
       gallery: (json['gallery'] as List)
           .map((e) => GalleryImage.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nextProjectSlug: json['githubUrl'] as String?, githubUrl: '',
+      nextProjectSlug: json['nextProjectSlug'] as String?,
+      githubUrl: (json['githubUrl'] as String?) ?? '',
     );
   }
 }

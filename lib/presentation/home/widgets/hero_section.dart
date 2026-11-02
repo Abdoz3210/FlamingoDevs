@@ -1,263 +1,126 @@
-import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
 import 'package:bma_portfolio/core/utils/responsive.dart';
 import 'package:bma_portfolio/core/utils/scroll_service.dart';
+import 'package:bma_portfolio/presentation/home/widgets/draggable_flamingo.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/ghost_button.dart';
 import 'package:bma_portfolio/presentation/shared_widgets/primary_button.dart';
+import 'package:bma_portfolio/presentation/shared_widgets/reveal.dart';
 import 'package:flutter/material.dart';
 
-class HeroSection extends StatefulWidget {
+class HeroSection extends StatelessWidget {
   final ScrollService scrollService;
 
   const HeroSection({super.key, required this.scrollService});
 
   @override
-  State<HeroSection> createState() => _HeroSectionState();
-}
-
-class _HeroSectionState extends State<HeroSection>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _floatController;
-
-  @override
-  void initState() {
-    super.initState();
-    _floatController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 6),
-    )..repeat(reverse: true);
-  }
-
-  @override
-  void dispose() {
-    _floatController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-    final colors = Theme.of(context).colorScheme;
+    final vh = MediaQuery.sizeOf(context).height;
 
-    final headlineStyle = isMobile
-        ? AppTypogragh.displayMobile(color: colors.onSurface)
-        : Theme.of(context).textTheme.displayLarge;
-
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        Responsive.sideMargin(context),
-        isMobile ? 140 : 180,
-        Responsive.sideMargin(context),
-        80,
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: vh),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+            Responsive.sideMargin(context),
+            isMobile ? 88 : 96,
+            Responsive.sideMargin(context),
+            isMobile ? 48 : 64,
+          ),
+          child: isMobile ? _buildMobile(context) : _buildDesktop(context),
+        ),
       ),
-      child: isMobile
-          ? _buildMobile(context, headlineStyle)
-          : _buildDesktop(context, headlineStyle),
     );
   }
 
-  Widget _buildDesktop(BuildContext context, TextStyle? headlineStyle) {
-    final colors = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
+  Widget _buildDesktop(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(flex: 3, child: _buildContent(context, headlineStyle, colors)),
+        Expanded(flex: 3, child: _buildContent(context, false)),
         const SizedBox(width: 40),
-        Expanded(
+        const Expanded(
           flex: 2,
-          child: Center(child: _HoverLogo(isDark: isDark)),
+          child: Center(child: DraggableFlamingo(height: 520)),
         ),
       ],
     );
   }
 
-  Widget _buildMobile(BuildContext context, TextStyle? headlineStyle) {
-    final colors = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+  Widget _buildMobile(BuildContext context) {
     return Column(
       children: [
-        Center(child: _HoverLogo(isDark: isDark)),
-        const SizedBox(height: 32),
-
-        _buildContent(context, headlineStyle, colors),
+        const Reveal(child: DraggableFlamingo(height: 300)),
+        const SizedBox(height: 24),
+        _buildContent(context, true),
       ],
     );
   }
 
-  Widget _buildContent(
-    BuildContext context,
-    TextStyle? headlineStyle,
-    ColorScheme colors,
-  ) {
+  Widget _buildContent(BuildContext context, bool isMobile) {
+    final scheme = Theme.of(context).colorScheme;
+    final headline = isMobile
+        ? AppTypogragh.displayMobile(color: scheme.onSurface)
+        : Theme.of(context).textTheme.displayLarge!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'MOBILE ENGINEERING',
-          style: AppTypogragh.headlineMobile(color: colors.primary),
-        ),
-        const SizedBox(height: 20),
-        // Headline — each line reacts to hover independently
-        _HoverText(
-          text: 'Precisely crafted',
-          style: AppTypogragh.origami(color: AppColors.darkPrimaryContainer),
-          useGradientDefault: true, // this line starts as gradient
-        ),
-        _HoverText(
-          text: 'mobile experiences',
-          style: AppTypogragh.origami(color: AppColors.darkPrimaryContainer),
-          useGradientDefault: true, // this line starts as gradient
-        ),
-        _HoverText(
-          text: 'for visionary brands.',
-          style: AppTypogragh.origami(color: AppColors.darkPrimaryContainer),
-          useGradientDefault: true, // this line starts as gradient
-        ),
-
-        const SizedBox(height: 20),
-
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 400),
+        Reveal(
           child: Text(
-            'We blend architectural discipline with elite engineering '
-            'to build high-performance mobile products that scale.',
-            style: Theme.of(context).textTheme.bodyLarge,
+            'FLAMINGO DEVS · MOBILE & WEB STUDIO',
+            style: AppTypogragh.mono(color: scheme.primary, fontSize: 12),
+          ),
+        ),
+        const SizedBox(height: 22),
+        FoldHeadline(
+          lead: 'We fold ideas into',
+          accent: 'apps that ship.',
+          style: headline,
+        ),
+        const SizedBox(height: 24),
+        Reveal(
+          delay: const Duration(milliseconds: 600),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: Text(
+              'Three developers, one studio. We design and build Flutter and '
+              'iOS apps and websites, from the first sketch to the store '
+              'listing.',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
         ),
         const SizedBox(height: 32),
-        Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [
-            PrimaryButton(
-              label: 'VIEW OUR WORK',
-              onPressed: () =>
-                  widget.scrollService.scrollTo(HomeSection.projects),
+        Reveal(
+          delay: const Duration(milliseconds: 750),
+          child: Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              PrimaryButton(
+                label: 'SEE THE WORK',
+                onPressed: () => scrollService.scrollTo(HomeSection.projects),
+              ),
+              GhostButton(
+                label: 'CONTACT',
+                onPressed: () => scrollService.scrollTo(HomeSection.contact),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 36),
+        Reveal(
+          delay: const Duration(milliseconds: 900),
+          child: Text(
+            'scroll · each section is a sheet of paper',
+            style: AppTypogragh.mono(
+              color: scheme.onSurfaceVariant,
+              fontSize: 11,
             ),
-            GhostButton(
-              label: 'ABOUT US',
-              onPressed: () => widget.scrollService.scrollTo(HomeSection.about),
-            ),
-          ],
+          ),
         ),
       ],
-    );
-  }
-}
-
-class _HoverLogo extends StatefulWidget {
-  final bool isDark;
-  const _HoverLogo({required this.isDark});
-
-  @override
-  State<_HoverLogo> createState() => __HoverLogoState();
-}
-
-class __HoverLogoState extends State<_HoverLogo> {
-  bool _hovered = false;
-  @override
-  Widget build(BuildContext context) {
-    final defualtAsset = widget.isDark
-        ? 'assets/images/logo/icon_dark.png'
-        : 'assets/images/logo/icon_light.png';
-
-    final hoverAsset = !widget.isDark
-        ? 'assets/images/logo/icon_dark.png'
-        : 'assets/images/logo/icon_light.png';
-
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() {
-        _hovered = true;
-      }),
-      onExit: (_) => setState(() {
-        _hovered = false;
-      }),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          AnimatedOpacity(
-            opacity: _hovered ? 0.0 : 1.0,
-            duration: const Duration(milliseconds: 400),
-            child: Image.asset(
-              defualtAsset,
-              key: ValueKey(_hovered),
-              width: 400,
-              height: 400,
-              fit: BoxFit.contain,
-            ),
-          ),
-          AnimatedOpacity(
-            opacity: _hovered ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 400),
-            child: Image.asset(
-              hoverAsset,
-              key: ValueKey(_hovered),
-              width: 400,
-              height: 400,
-              fit: BoxFit.contain,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _HoverText extends StatefulWidget {
-  final String text;
-  final TextStyle style;
-  final bool useGradientDefault;
-
-  const _HoverText({
-    required this.text,
-    required this.style,
-    this.useGradientDefault = false,
-  });
-
-  @override
-  State<_HoverText> createState() => _HoverTextState();
-}
-
-class _HoverTextState extends State<_HoverText> {
-  bool _hovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-
-    final showGradient = widget.useGradientDefault ? !_hovered : _hovered;
-
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: Stack(
-        children: [
-          AnimatedOpacity(
-            opacity: showGradient ? 0.0 : 1.0,
-            duration: const Duration(milliseconds: 250),
-            child: Text(
-              widget.text,
-              key: ValueKey('gradient_${widget.text}'),
-              style: widget.style,
-            ),
-          ),
-          AnimatedOpacity(
-            opacity: showGradient ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 250),
-            child: Text(
-              widget.text,
-              key: ValueKey('plain_${widget.text}'),
-              style: widget.style.copyWith(
-                color: colors.onSurface,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

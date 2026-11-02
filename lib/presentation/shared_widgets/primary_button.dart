@@ -24,9 +24,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
 
   @override
   Widget build(BuildContext context) {
-    final labelColor = Theme.of(context).brightness == Brightness.dark
-        ? AppColors.darkSurfaceContainerLowest
-        : AppColors.lightSurfaceContainerLowest;
+    const labelColor = AppColors.onGradient;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() {
@@ -44,7 +42,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           onTap: widget.loading ? null : widget.onPressed,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 15),
             decoration: BoxDecoration(
               gradient: AppGradient.of(context),
               borderRadius: BorderRadius.circular(9999),
@@ -66,14 +64,15 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                     height: 18,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation(labelColor),
+                      valueColor: const AlwaysStoppedAnimation(labelColor),
                     ),
                   )
                 : Text(
                     widget.label,
                     style: AppTypogragh.mono(
                       color: labelColor,
-                    ).copyWith(fontSize: 14),
+                      fontSize: 13,
+                    ),
                   ),
           ),
         ),

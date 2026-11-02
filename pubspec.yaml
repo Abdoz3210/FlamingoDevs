@@ -64,6 +64,7 @@ flutter:
     - assets/data/projects.json
     - assets/data/services.json
     - assets/images/logo/
+    - assets/images/flamingo/
     - assets/images/projects/my-coffee-shop/
     - assets/images/projects/weather-app-ios/
     - assets/images/projects/money-tracker-ios/

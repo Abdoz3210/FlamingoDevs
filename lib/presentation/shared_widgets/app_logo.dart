@@ -1,41 +1,29 @@
-import 'package:bma_portfolio/core/constants/app_colors.dart';
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
+import 'package:bma_portfolio/presentation/shared_widgets/origami_widgets.dart';
 import 'package:flutter/material.dart';
 
+/// The folded-paper mark with the "Flamingo" wordmark beside it.
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key, this.size = 200, this.showWordmark = true});
+  const AppLogo({super.key, this.size = 28, this.showWordmark = true});
 
+  /// Height of the mark. The wordmark scales with it.
   final double size;
   final bool showWordmark;
+
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness;
-    // final textColor = Theme.of(context).colorScheme.onSurface;
-    final assetPath = isDark
-        ? 'assets/images/logo/icon_dark.png'
-        : 'assets/images/logo/icon_light.png';
-
+    final ink = Theme.of(context).colorScheme.onSurface;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          assetPath,
-          height: size,
-          fit: BoxFit.fitHeight,
-
-          // errorBuilder: (_, __, ___) =>
-          //     Icon(Icons.terrain_outlined, size: size, color: textColor),
-        ),
+        OrigamiMark(size: size),
         if (showWordmark) ...[
-          SizedBox(width: size * 0.42),
+          SizedBox(width: size * 0.38),
           Text(
-            'FLAMINGO Devs',
-            textAlign: TextAlign.center,
-            style: AppTypogragh.origami(color: AppColors.lightPrimary).copyWith(
-              // fontWeight: FontWeight.w700,
-              fontSize: size * 0.5,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 2,
+            'Flamingo',
+            style: AppTypogragh.origami(color: ink).copyWith(
+              fontSize: size * 0.78,
+              height: 1,
             ),
           ),
         ],
