@@ -114,7 +114,7 @@ class ProjectHero extends StatelessWidget {
                     Reveal(
                       delay: const Duration(milliseconds: 700),
                       child: PrimaryButton(
-                        label: 'VIEW ON GITHUB ↗',
+                        label: 'View on GitHub ↗',
                         onPressed: _openGithub,
                       ),
                     ),

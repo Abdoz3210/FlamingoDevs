@@ -153,7 +153,8 @@ class _AppHeaderState extends State<AppHeader> {
           if (!isMobile) ...[
             const SizedBox(width: 12),
             GhostButton(
-              label: "let's TALK",
+              compact: true,
+              label: "Let's talk",
               onPressed: () => _goto(HomeSection.contact),
             ),
           ] else

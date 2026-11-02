@@ -48,11 +48,28 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget _buildMobile(BuildContext context) {
-    return Column(
+    // The text is laid out under the bird's spot, and the bird comes last in
+    // the stack, so when it is dragged over the text it passes in front.
+    const birdHeight = 300.0;
+    const birdBlock = birdHeight + 22; // the bird plus its "drag me" hint
+    return Stack(
+      clipBehavior: Clip.none,
       children: [
-        const Reveal(child: DraggableFlamingo(height: 300)),
-        const SizedBox(height: 24),
-        _buildContent(context, true),
+        Column(
+          children: [
+            const SizedBox(height: birdBlock + 24),
+            _buildContent(context, true),
+          ],
+        ),
+        const Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Reveal(child: DraggableFlamingo(height: birdHeight)),
+          ),
+        ),
       ],
     );
   }
@@ -99,11 +116,11 @@ class HeroSection extends StatelessWidget {
             runSpacing: 16,
             children: [
               PrimaryButton(
-                label: 'SEE THE WORK',
+                label: 'See the work',
                 onPressed: () => scrollService.scrollTo(HomeSection.projects),
               ),
               GhostButton(
-                label: 'CONTACT',
+                label: 'Contact',
                 onPressed: () => scrollService.scrollTo(HomeSection.contact),
               ),
             ],

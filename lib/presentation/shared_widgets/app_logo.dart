@@ -1,12 +1,13 @@
 import 'package:bma_portfolio/core/constants/app_typogragh.dart';
-import 'package:bma_portfolio/presentation/shared_widgets/origami_widgets.dart';
+import 'package:bma_portfolio/presentation/shared_widgets/paper_edge.dart';
 import 'package:flutter/material.dart';
 
-/// The folded-paper mark with the "Flamingo" wordmark beside it.
+/// The origami flamingo with the "Flamingo" wordmark beside it.
 class AppLogo extends StatelessWidget {
   const AppLogo({super.key, this.size = 28, this.showWordmark = true});
 
-  /// Height of the mark. The wordmark scales with it.
+  /// Base size. The bird is a little taller than this and the wordmark
+  /// scales with it.
   final double size;
   final bool showWordmark;
 
@@ -16,9 +17,15 @@ class AppLogo extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        OrigamiMark(size: size),
+        Image.asset(
+          FlamingoMark.asset,
+          height: size * 1.3,
+          fit: BoxFit.fitHeight,
+          filterQuality: FilterQuality.medium,
+          excludeFromSemantics: true,
+        ),
         if (showWordmark) ...[
-          SizedBox(width: size * 0.38),
+          SizedBox(width: size * 0.34),
           Text(
             'Flamingo',
             style: AppTypogragh.origami(color: ink).copyWith(
