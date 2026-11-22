@@ -101,20 +101,20 @@
   },
   {
     "slug": "news-cloud-app",
-    "title": "News Cloud App",
-    "category": "Education / News",
-    "shortDescription": "A cross-platform Flutter news app with real-time headlines across 7 categories.",
-    "tagline": "Real-time top headlines across Business, Health, Science, Sports, and more — delivered through a clean category-driven Flutter experience.",
-    "platforms": ["iOS", "Android", "Flutter"],
+    "title": "News Cloud (The Chronicler)",
+    "category": "News & Media",
+    "shortDescription": "A Flutter news reader with live headlines in 7 categories, an editorial article view and Firebase accounts.",
+    "tagline": "Live headlines across Business, Health, Science, Sports, Technology and more, read in a calm, magazine-style Flutter app.",
+    "platforms": ["Android", "iOS", "Web"],
     "coverImage": "assets/images/projects/news-cloud-app/cover.png",
     "githubUrl": "https://github.com/Abdoz3210/News-Cloud-App",
-    "challenge": "News consumption is fragmented across too many sources. Users needed a single clean interface to browse headlines by category, with fast loading, rich article cards, and reliable error handling when the network fails.",
-    "solution": "Built with Flutter and Dart, using Dio for HTTP requests against the NewsAPI. Features a horizontal category carousel with cover images, async data fetching with FutureBuilder, loading indicators, and a detail view per article. Runs on Android, iOS, Web, macOS, Linux, and Windows from a single codebase.",
-    "techStack": ["Flutter", "Dart", "Dio", "NewsAPI", "FutureBuilder"],
+    "challenge": "Many news apps are cluttered, hard to scan and break quietly when the connection drops. Readers wanted one clean place to skim headlines by topic, read a story comfortably, and keep their own account and reading preferences.",
+    "solution": "We built News Cloud (The Chronicler) in Flutter with Dio and NewsAPI: a category carousel and headline cards for 7 topics, with loading and error states when the network fails. Articles open in an editorial detail view with the source, a pull quote, an author card and further reading. Firebase Authentication handles sign-up and sign-in, and the profile lets readers edit their name and email, change their password, delete their account, choose notification preferences and switch to dark mode. A Codemagic workflow builds the iOS app in the cloud without a local Mac.",
+    "techStack": ["Flutter", "Dart", "Dio", "NewsAPI", "Provider", "Firebase Auth", "Firebase Realtime Database", "Codemagic"],
     "metrics": [
-      {"label": "Categories", "value": "7"},
-      {"label": "Platforms", "value": "6"},
-      {"label": "Data", "value": "Real-time"}
+      { "label": "Categories", "value": "7" },
+      { "label": "Platforms", "value": "Android · iOS · Web" },
+      { "label": "Accounts", "value": "Firebase" }
     ],
     "gallery": [
       {"path": "assets/images/projects/news-cloud-app/gallery_1.png", "size": "small"},
