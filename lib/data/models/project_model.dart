@@ -1,4 +1,3 @@
-
 enum GalleryImageSize { small, tall, large }
 
 class GalleryImage {
@@ -44,7 +43,11 @@ class ProjectModel {
   final List<ProjectMetrics> metrics;
   final List<GalleryImage> gallery;
   final String? nextProjectSlug;
-  final String githubUrl; 
+  final String githubUrl;
+
+  /// A real app screen shown in the small phone on the home-page card.
+  /// Null until we have a screenshot; the phone then shows a sketch.
+  final String? cardScreen;
 
   const ProjectModel({
     required this.slug,
@@ -61,6 +64,7 @@ class ProjectModel {
     required this.gallery,
     this.nextProjectSlug,
     required this.githubUrl,
+    this.cardScreen,
   });
 
   /// The "Coming Soon" entries in projects.json are not real projects: they
@@ -87,6 +91,7 @@ class ProjectModel {
           .toList(),
       nextProjectSlug: json['nextProjectSlug'] as String?,
       githubUrl: (json['githubUrl'] as String?) ?? '',
+      cardScreen: json['cardScreen'] as String?,
     );
   }
 }

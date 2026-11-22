@@ -75,7 +75,11 @@ class _ProjectCardState extends State<ProjectCard> {
                       children: [
                         ProjectCover(project: p, aspectRatio: null, lit: lit),
                         IgnorePointer(
-                          child: ProjectMiniPhone(palette: palette, lit: lit),
+                          child: ProjectMiniPhone(
+                            palette: palette,
+                            screen: p.cardScreen,
+                            lit: lit,
+                          ),
                         ),
                       ],
                     ),
@@ -93,9 +97,9 @@ class _ProjectCardState extends State<ProjectCard> {
                                 p.title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  fontSize: 18,
-                                ),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleLarge?.copyWith(fontSize: 18),
                               ),
                               const SizedBox(height: 2),
                               Text(

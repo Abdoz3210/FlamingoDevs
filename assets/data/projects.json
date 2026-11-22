@@ -8,6 +8,7 @@
     "platforms": ["Android"],
     "coverImage": "assets/images/projects/cairogo/cover.png",
     "githubUrl": "",
+    "cardScreen": "assets/images/projects/cairogo/gallery_1.png",
     "challenge": "Getting around Greater Cairo means piecing together separate references for Metro lines 1-3, the Monorail, the LRT and the Ring Road BRT. Tunnels drop mobile signal, fares differ per mode, and blind and low-vision riders need reliable screen-reader support and clear guidance.",
     "solution": "We built CairoGo in Flutter as an offline-first Android app: all stations, lines and fares ship on the device, and our own Dijkstra and Yen k-shortest-paths routing compares up to three routes by time or changes, with fares for every mode. Station search works in Arabic and English, by typing or by voice, with filters per line. Transit GO guides each trip with spoken cues and vibration milestones, and both a schematic map and a text map are included. The app supports English and right-to-left Arabic, light and dark themes and large text, and was designed against WCAG 2.2 AA with automated accessibility tests.",
     "techStack": ["Flutter", "Dart", "Riverpod", "SQLite (sqflite)", "flutter_tts", "speech_to_text"],

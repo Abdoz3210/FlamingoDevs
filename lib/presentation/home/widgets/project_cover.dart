@@ -136,10 +136,28 @@ class ProjectArt extends StatelessWidget {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    fold(-10, 30, 70, 90, palette.a, 1,
-                        dx: -0.04, dy: -0.05, degrees: -3),
-                    fold(40, -10, 65, 100, palette.b, 0.9,
-                        dx: 0.03, dy: 0.06, degrees: 3),
+                    fold(
+                      -10,
+                      30,
+                      70,
+                      90,
+                      palette.a,
+                      1,
+                      dx: -0.04,
+                      dy: -0.05,
+                      degrees: -3,
+                    ),
+                    fold(
+                      40,
+                      -10,
+                      65,
+                      100,
+                      palette.b,
+                      0.9,
+                      dx: 0.03,
+                      dy: 0.06,
+                      degrees: 3,
+                    ),
                     fold(62, 46, 40, 62, palette.c, 1, dx: 0.05, dy: -0.04),
                     fold(6, 6, 28, 44, palette.d, 0.8),
                   ],
@@ -170,9 +188,17 @@ class _TriangleClipper extends CustomClipper<Path> {
 /// A small phone that rises out of the bottom of a card cover. On [lit] it
 /// lifts and tilts a little.
 class ProjectMiniPhone extends StatelessWidget {
-  const ProjectMiniPhone({super.key, required this.palette, this.lit = false});
+  const ProjectMiniPhone({
+    super.key,
+    required this.palette,
+    this.screen,
+    this.lit = false,
+  });
 
   final ProjectPalette palette;
+
+  /// Asset path of a real app screenshot; null shows the sketch.
+  final String? screen;
   final bool lit;
 
   @override
@@ -204,7 +230,7 @@ class ProjectMiniPhone extends StatelessWidget {
                       ..rotateZ(-3 * math.pi / 180 * k),
                     child: child,
                   ),
-                  child: _PhoneBody(palette: palette),
+                  child: _PhoneBody(palette: palette, screen: screen),
                 ),
               ),
             ],
@@ -216,9 +242,10 @@ class ProjectMiniPhone extends StatelessWidget {
 }
 
 class _PhoneBody extends StatelessWidget {
-  const _PhoneBody({required this.palette});
+  const _PhoneBody({required this.palette, this.screen});
 
   final ProjectPalette palette;
+  final String? screen;
 
   static const _bar = Color(0xFFE3C9CD);
 
@@ -231,6 +258,32 @@ class _PhoneBody extends StatelessWidget {
         color: _bar,
         borderRadius: BorderRadius.circular(2),
       ),
+    ),
+  );
+
+  Widget _sketch() => Padding(
+    padding: const EdgeInsets.fromLTRB(6, 12, 6, 6),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          height: 26,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [palette.a, palette.b],
+            ),
+          ),
+        ),
+        const SizedBox(height: 5),
+        _line(0.8),
+        const SizedBox(height: 5),
+        _line(0.58),
+        const SizedBox(height: 5),
+        _line(0.7),
+      ],
     ),
   );
 
@@ -250,31 +303,19 @@ class _PhoneBody extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(6, 12, 6, 6),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: 26,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [palette.a, palette.b],
-                ),
+      child: screen == null
+          ? _sketch()
+          : ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                screen!,
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+                filterQuality: FilterQuality.medium,
+                excludeFromSemantics: true,
+                errorBuilder: (_, _, _) => _sketch(),
               ),
             ),
-            const SizedBox(height: 5),
-            _line(0.8),
-            const SizedBox(height: 5),
-            _line(0.58),
-            const SizedBox(height: 5),
-            _line(0.7),
-          ],
-        ),
-      ),
     );
   }
 }
