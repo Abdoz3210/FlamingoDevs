@@ -1,5 +1,30 @@
 [
   {
+    "slug": "cairogo",
+    "title": "CairoGo",
+    "category": "Transportation",
+    "shortDescription": "An offline-first, accessible Flutter app for planning trips on Greater Cairo's Metro, Monorail, LRT and Ring Road BRT.",
+    "tagline": "Greater Cairo's rail and rapid-bus network in one bilingual app that works underground, with no signal and with a screen reader.",
+    "platforms": ["Android"],
+    "coverImage": "assets/images/projects/cairogo/cover.png",
+    "githubUrl": "",
+    "challenge": "Getting around Greater Cairo means piecing together separate references for Metro lines 1-3, the Monorail, the LRT and the Ring Road BRT. Tunnels drop mobile signal, fares differ per mode, and blind and low-vision riders need reliable screen-reader support and clear guidance.",
+    "solution": "We built CairoGo in Flutter as an offline-first Android app: all stations, lines and fares ship on the device, and our own Dijkstra and Yen k-shortest-paths routing compares up to three routes by time or changes, with fares for every mode. Station search works in Arabic and English, by typing or by voice, with filters per line. Transit GO guides each trip with spoken cues and vibration milestones, and both a schematic map and a text map are included. The app supports English and right-to-left Arabic, light and dark themes and large text, and was designed against WCAG 2.2 AA with automated accessibility tests.",
+    "techStack": ["Flutter", "Dart", "Riverpod", "SQLite (sqflite)", "flutter_tts", "speech_to_text"],
+    "metrics": [
+      { "label": "Platforms", "value": "Android" },
+      { "label": "Languages", "value": "English & Arabic" },
+      { "label": "Works", "value": "Offline" }
+    ],
+    "gallery": [
+      { "path": "assets/images/projects/cairogo/gallery_1.png", "size": "small" },
+      { "path": "assets/images/projects/cairogo/gallery_2.png", "size": "small" },
+      { "path": "assets/images/projects/cairogo/gallery_3.png", "size": "tall" },
+      { "path": "assets/images/projects/cairogo/gallery_4.png", "size": "large" }
+    ],
+    "nextProjectSlug": "my-coffee-shop"
+  },
+  {
     "slug": "my-coffee-shop",
     "title": "MyCoffeeShop",
     "category": "Food & Beverage",
@@ -97,29 +122,6 @@
       {"path": "assets/images/projects/news-cloud-app/gallery_3.png", "size": "tall"},
       {"path": "assets/images/projects/news-cloud-app/gallery_4.png", "size": "large"}
     ],
-    "nextProjectSlug": "placeholder-one"
-  },
-  {
-    "slug": "placeholder-one",
-    "title": "Coming Soon",
-    "category": "Mobile Development",
-    "shortDescription": "Another project from Flamingo — details coming soon.",
-    "tagline": "We're always building something new. Stay tuned.",
-    "platforms": ["iOS", "Android", "Flutter"],
-    "coverImage": "assets/images/projects/placeholder-one/cover.png",
-    "githubUrl": "",
-    "challenge": "Details coming soon.",
-    "solution": "Details coming soon.",
-    "techStack": ["Flutter", "Dart"],
-    "metrics": [
-      {"label": "Status", "value": "Soon"}
-    ],
-    "gallery": [
-      {"path": "assets/images/projects/placeholder-one/gallery_1.png", "size": "small"},
-      {"path": "assets/images/projects/placeholder-one/gallery_2.png", "size": "small"},
-      {"path": "assets/images/projects/placeholder-one/gallery_3.png", "size": "tall"},
-      {"path": "assets/images/projects/placeholder-one/gallery_4.png", "size": "large"}
-    ],
     "nextProjectSlug": "placeholder-two"
   },
   {
@@ -143,6 +145,6 @@
       {"path": "assets/images/projects/placeholder-two/gallery_3.png", "size": "tall"},
       {"path": "assets/images/projects/placeholder-two/gallery_4.png", "size": "large"}
     ],
-    "nextProjectSlug": "my-coffee-shop"
+    "nextProjectSlug": "cairogo"
   }
 ]
