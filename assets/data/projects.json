@@ -122,28 +122,30 @@
       {"path": "assets/images/projects/news-cloud-app/gallery_3.png", "size": "tall"},
       {"path": "assets/images/projects/news-cloud-app/gallery_4.png", "size": "large"}
     ],
-    "nextProjectSlug": "placeholder-two"
+    "nextProjectSlug": "la-familia"
   },
   {
-    "slug": "placeholder-two",
-    "title": "Coming Soon",
-    "category": "Mobile Development",
-    "shortDescription": "Another project from Flamingo — details coming soon.",
-    "tagline": "We're always building something new. Stay tuned.",
-    "platforms": ["iOS", "Android", "Flutter"],
-    "coverImage": "assets/images/projects/placeholder-two/cover.png",
-    "githubUrl": "",
-    "challenge": "Details coming soon.",
-    "solution": "Details coming soon.",
-    "techStack": ["Flutter", "Dart"],
+    "slug": "la-familia",
+    "title": "La Familia",
+    "category": "Messaging",
+    "shortDescription": "A native Android messaging app that keeps working offline: messages queue on the device and send themselves when the signal returns.",
+    "tagline": "Private chats for family and friends that survive dead zones, in English or right-to-left Arabic.",
+    "platforms": ["Android"],
+    "coverImage": "assets/images/projects/la-familia/cover.png",
+    "githubUrl": "https://github.com/Abdoz3210/MC_Project",
+    "challenge": "On weak or patchy mobile networks, chat apps lose or silently drop messages, and people are left guessing whether a message arrived or tapping retry by hand. Many Android chat apps also handle Arabic and right-to-left layouts poorly.",
+    "solution": "We built La Familia natively in Kotlin and Jetpack Compose around an offline-first design: Room on the device is the single source of truth, so conversations open instantly and messages written without signal go into a local outbox. WorkManager sends them automatically with retries once the device is back online, and every bubble shows its status: queued, sending, sent, delivered, read or failed with tap to retry. Firebase Authentication and Cloud Firestore handle accounts and sync, DataStore keeps theme and language settings, and the whole app supports English and Arabic with mirrored right-to-left layouts in light and dark themes. La Familia is a university team project (Mobile Computing, Phase 1) led by Abdelrhman and still in development; the gallery shows the app's design wireframes.",
+    "techStack": ["Kotlin", "Jetpack Compose", "Material 3", "Room", "WorkManager", "Firebase Auth", "Cloud Firestore", "DataStore"],
     "metrics": [
-      {"label": "Status", "value": "Soon"}
+      { "label": "Platform", "value": "Android" },
+      { "label": "Languages", "value": "English & Arabic" },
+      { "label": "Works", "value": "Offline" }
     ],
     "gallery": [
-      {"path": "assets/images/projects/placeholder-two/gallery_1.png", "size": "small"},
-      {"path": "assets/images/projects/placeholder-two/gallery_2.png", "size": "small"},
-      {"path": "assets/images/projects/placeholder-two/gallery_3.png", "size": "tall"},
-      {"path": "assets/images/projects/placeholder-two/gallery_4.png", "size": "large"}
+      {"path": "assets/images/projects/la-familia/gallery_1.png", "size": "small"},
+      {"path": "assets/images/projects/la-familia/gallery_2.png", "size": "small"},
+      {"path": "assets/images/projects/la-familia/gallery_3.png", "size": "tall"},
+      {"path": "assets/images/projects/la-familia/gallery_4.png", "size": "large"}
     ],
     "nextProjectSlug": "cairogo"
   }
